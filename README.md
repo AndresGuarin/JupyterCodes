@@ -1,6 +1,6 @@
 # JupyterCodes
 
-The main purpose of this repository is to share my codes that I created for my university courses (Universidad Industrial de Santander, Bucaramanga, Colombia). This codes are usually on jupyter. The main topics of this codes are about mechanics, electromagnetism and waves e.g., parabolic shots, average velocities, equipotential lines of an electric charge distribution, rotating vectors, data analysis, and curve fits.
+The main purpose of this repository is to share the codes my classmates and I created for our university courses at Universidad Industrial de Santander (Bucaramanga, Colombia). This codes are usually on jupyter. The main topics of this codes are about mechanics, electromagnetism and waves e.g., parabolic shots, average velocities, equipotential lines of an electric charge distribution, rotating vectors, data analysis, and curve fits.
 
 In this repository you will find:
 
