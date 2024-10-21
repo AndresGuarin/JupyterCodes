@@ -1,0 +1,225 @@
+Thorlabs Single Photon Counter Data Export
+
+Date (YYYY-MM-DD):	2024-07-12
+Time (HH:MM:SS):	12:54:13
+Device Name:	SPCM50A
+Serial Number:	M00296614
+GUI Revision:	1.0 Build 23
+Driver Revision:	1.1.0
+Firmware Revision:	1.0.0
+
+Application settings:
+Operating Mode:	Free Running Timed Counter
+Bin Length [ms]:	100
+Time between Bins [ms]:	0.1
+Pulse Blind Time [ns]:	0
+Trigger Edge:	non-applicable
+Array Measurement:	No
+Array Measurement Continuously:	non-applicable
+Bins per Array:	non-applicable
+Active APD Gating:	Yes
+Fan Off:	No
+
+Bin Number 	Counts per Bin 	Remarks
+        1	       693031 	
+        2	       692476 	APD Saturated
+        3	       693341 	APD Saturated
+        4	       692132 	APD Saturated
+        5	       692185 	APD Saturated
+        6	       692710 	APD Saturated
+        7	       691923 	APD Saturated
+        8	       693487 	APD Saturated
+        9	       693054 	APD Saturated
+       10	       692157 	APD Saturated
+       11	       693671 	APD Saturated
+       12	       692847 	APD Saturated
+       13	       692075 	APD Saturated
+       14	       693287 	APD Saturated
+       15	       692638 	APD Saturated
+       16	       692931 	APD Saturated
+       17	       692378 	APD Saturated
+       18	       692211 	APD Saturated
+       19	       692874 	APD Saturated
+       20	       691391 	APD Saturated
+       21	       692386 	APD Saturated
+       22	       692816 	APD Saturated
+       23	       691920 	APD Saturated
+       24	       692658 	APD Saturated
+       25	       692741 	APD Saturated
+       26	       692434 	APD Saturated
+       27	       693669 	APD Saturated
+       28	       692837 	APD Saturated
+       29	       692542 	APD Saturated
+       30	       692469 	APD Saturated
+       31	       693001 	APD Saturated
+       32	       692152 	APD Saturated
+       33	       693571 	APD Saturated
+       34	       693319 	APD Saturated
+       35	       691406 	APD Saturated
+       36	       692110 	APD Saturated
+       37	       692846 	APD Saturated
+       38	       692359 	APD Saturated
+       39	       692785 	APD Saturated
+       40	       692898 	APD Saturated
+       41	       693313 	APD Saturated
+       42	       692755 	APD Saturated
+       43	       692757 	APD Saturated
+       44	       693019 	APD Saturated
+       45	       693275 	APD Saturated
+       46	       692242 	APD Saturated
+       47	       692074 	APD Saturated
+       48	       692662 	APD Saturated
+       49	       692651 	APD Saturated
+       50	       692926 	APD Saturated
+       51	       692313 	APD Saturated
+       52	       692421 	APD Saturated
+       53	       692591 	APD Saturated
+       54	       691762 	APD Saturated
+       55	       692787 	APD Saturated
+       56	       692230 	APD Saturated
+       57	       692327 	APD Saturated
+       58	       692696 	APD Saturated
+       59	       691823 	APD Saturated
+       60	       692386 	APD Saturated
+       61	       692923 	APD Saturated
+       62	       693107 	APD Saturated
+       63	       691866 	APD Saturated
+       64	       691416 	APD Saturated
+       65	       692105 	APD Saturated
+       66	       691606 	APD Saturated
+       67	       692118 	APD Saturated
+       68	       692284 	APD Saturated
+       69	       692883 	APD Saturated
+       70	       691910 	APD Saturated
+       71	       692485 	APD Saturated
+       72	       692715 	APD Saturated
+       73	       692267 	APD Saturated
+       74	       692264 	APD Saturated
+       75	       691964 	APD Saturated
+       76	       692591 	APD Saturated
+       77	       692323 	APD Saturated
+       78	       691654 	APD Saturated
+       79	       693281 	APD Saturated
+       80	       692011 	APD Saturated
+       81	       691887 	APD Saturated
+       82	       692030 	APD Saturated
+       83	       692862 	APD Saturated
+       84	       693036 	APD Saturated
+       85	       692153 	APD Saturated
+       86	       692003 	APD Saturated
+       87	       692822 	APD Saturated
+       88	       693194 	APD Saturated
+       89	       692480 	APD Saturated
+       90	       693559 	APD Saturated
+       91	       691988 	APD Saturated
+       92	       692696 	APD Saturated
+       93	       691238 	APD Saturated
+       94	       693295 	APD Saturated
+       95	       692303 	APD Saturated
+       96	       691684 	APD Saturated
+       97	       691140 	APD Saturated
+       98	       692591 	APD Saturated
+       99	       691759 	APD Saturated
+      100	       692399 	APD Saturated
+      101	       693843 	APD Saturated
+      102	       692827 	APD Saturated
+      103	       691256 	APD Saturated
+      104	       692894 	APD Saturated
+      105	       692742 	APD Saturated
+      106	       692229 	APD Saturated
+      107	       692340 	APD Saturated
+      108	       692558 	APD Saturated
+      109	       691974 	APD Saturated
+      110	       692623 	APD Saturated
+      111	       691841 	APD Saturated
+      112	       692573 	APD Saturated
+      113	       692574 	APD Saturated
+      114	       691905 	APD Saturated
+      115	       692382 	APD Saturated
+      116	       692045 	APD Saturated
+      117	       691485 	APD Saturated
+      118	       692805 	APD Saturated
+      119	       692390 	APD Saturated
+      120	       693031 	APD Saturated
+      121	       692362 	APD Saturated
+      122	       692738 	APD Saturated
+      123	       692803 	APD Saturated
+      124	       691829 	APD Saturated
+      125	       692927 	APD Saturated
+      126	       692495 	APD Saturated
+      127	       691958 	APD Saturated
+      128	       691984 	APD Saturated
+      129	       691864 	APD Saturated
+      130	       692747 	APD Saturated
+      131	       692059 	APD Saturated
+      132	       692879 	APD Saturated
+      133	       692272 	APD Saturated
+      134	       691556 	APD Saturated
+      135	       691330 	APD Saturated
+      136	       691470 	APD Saturated
+      137	       691567 	APD Saturated
+      138	       693187 	APD Saturated
+      139	       692639 	APD Saturated
+      140	       692783 	APD Saturated
+      141	       693047 	APD Saturated
+      142	       692953 	APD Saturated
+      143	       692050 	APD Saturated
+      144	       691762 	APD Saturated
+      145	       693071 	APD Saturated
+      146	       692406 	APD Saturated
+      147	       691740 	APD Saturated
+      148	       692094 	APD Saturated
+      149	       692167 	APD Saturated
+      150	       692255 	APD Saturated
+      151	       692030 	APD Saturated
+      152	       692723 	APD Saturated
+      153	       691672 	APD Saturated
+      154	       691440 	APD Saturated
+      155	       692887 	APD Saturated
+      156	       692659 	APD Saturated
+      157	       692561 	APD Saturated
+      158	       692839 	APD Saturated
+      159	       692689 	APD Saturated
+      160	       690894 	APD Saturated
+      161	       692921 	APD Saturated
+      162	       690831 	APD Saturated
+      163	       692891 	APD Saturated
+      164	       691906 	APD Saturated
+      165	       692162 	APD Saturated
+      166	       691657 	APD Saturated
+      167	       691786 	APD Saturated
+      168	       692129 	APD Saturated
+      169	       692144 	APD Saturated
+      170	       692738 	APD Saturated
+      171	       690957 	APD Saturated
+      172	       692176 	APD Saturated
+      173	       691703 	APD Saturated
+      174	       692529 	APD Saturated
+      175	       692987 	APD Saturated
+      176	       693021 	APD Saturated
+      177	       691139 	APD Saturated
+      178	       691075 	APD Saturated
+      179	       692077 	APD Saturated
+      180	       692052 	APD Saturated
+      181	       691499 	APD Saturated
+      182	       693047 	APD Saturated
+      183	       692130 	APD Saturated
+      184	       691660 	APD Saturated
+      185	       690955 	APD Saturated
+      186	       692362 	APD Saturated
+      187	       691989 	APD Saturated
+      188	       692187 	APD Saturated
+      189	       692143 	APD Saturated
+      190	       692176 	APD Saturated
+      191	       692897 	APD Saturated
+      192	       692212 	APD Saturated
+      193	       692354 	APD Saturated
+      194	       692857 	APD Saturated
+      195	       691911 	APD Saturated
+      196	       692491 	APD Saturated
+      197	       691582 	APD Saturated
+      198	       692738 	APD Saturated
+      199	       692088 	APD Saturated
+      200	       692296 	APD Saturated
+      201	       692025 	APD Saturated
+      202	       691331 	APD Saturated
