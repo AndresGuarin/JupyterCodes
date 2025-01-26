@@ -85,13 +85,13 @@ def plot_pressure_charts(s,time,box,Ldt,dir='images/NparticlesGas/',date=' ',sav
         plt.legend(loc='upper right')
     if save: plt.savefig(dir+date+'pressures.png',dpi=300)
 
-def plot_pressure_line(s,time,box,Ldt,h,dir='images/NparticlesGas/',date=' ',save=False):
+def plot_pressure_line(s,time,box,Ldt,h,w1=5,w2=200,dir='images/NparticlesGas/',date=' ',save=False):
     fig = plt.figure(figsize=(20,5))
     fig.suptitle('\nMean pressure vs time\n', fontsize=14)
     for i in range(len(Ldt)):
         plt.subplot(1,3,i+1)
         time_P, P_top, P_bottom, P_right, P_left = get_Pressures(s,time,box,Ldt[i])
-        w = 5; kind = 0
+        w = w1; kind = 0
         time_P1, P_top1 = moving_mean(time_P,P_top,w,kind)
         time_P1, P_bottom1 = moving_mean(time_P,P_bottom,w,kind)
         time_P1, P_right1 = moving_mean(time_P,P_right,w,kind)
@@ -106,7 +106,7 @@ def plot_pressure_line(s,time,box,Ldt,h,dir='images/NparticlesGas/',date=' ',sav
         plt.plot(time_P1,P_mean2,'-',color='red',label=r'Time average '+f'{np.round(np.mean(P_mean1)*10**3,1)}E-3')
 
         time_P, P_top, P_bottom, P_right, P_left = get_Pressures(s,time,box,5*h)
-        w = 1000; kind = 0; lw=1; alpha=0.4
+        w = w2; kind = 0; lw=1; alpha=0.4
         time_P1, P_top1 = moving_mean(time_P,P_top,w,kind)
         time_P1, P_bottom1 = moving_mean(time_P,P_bottom,w,kind)
         time_P1, P_right1 = moving_mean(time_P,P_right,w,kind)
