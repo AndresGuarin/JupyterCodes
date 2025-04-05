@@ -57,12 +57,13 @@ def get_Pressures(s,time,box,dt):
 
     return time_P, P_top, P_bottom, P_right, P_left
 
-def plot_pressure_charts(s,time,box,Ldt,dir='images/NparticlesGas/',date=' ',save=False):
+def plot_pressure_charts(s,time,box,Ldt,dir='images/NparticlesGas/',date=' ',save=False,dpi=300,backup=True):
     """
     Plots a table of pressures based on differents time intervals. 
     By consistency the value of the time mean of P must be invariant
     under changes of this time interval.
     """
+    LPmean = []
     fig = plt.figure(figsize=(18,12))
     fig.suptitle('\nPressures vs time', fontsize=14)
     for i in range(len(Ldt)):
@@ -82,10 +83,13 @@ def plot_pressure_charts(s,time,box,Ldt,dir='images/NparticlesGas/',date=' ',sav
         plt.plot(time_P1,P_right1,'-g',label=r'$\overline{P}$ right',lw=1)    #;plt.plot(time_P, P_right,'o',color='green',alpha=0.5, ms=1.5)
         plt.plot(time_P1,P_left1,'-m',label=r'$\overline{P}$ left',lw=1)      #;plt.plot(time_P, P_left,'o',color='magenta',alpha=0.5, ms=1.5)
         plt.plot(time_P1,P_mean1,'-',color='cyan',label=r'$\left< \overline{P} \right>$ Time mean '+f'{np.round(np.mean(P_mean1)*10**3,2)}E-3')
+        LPmean.append(np.mean(P_mean1))
         plt.legend(loc='upper right')
-    if save: plt.savefig(dir+date+'pressures.png',dpi=300)
+    if save: plt.savefig(dir+date+'pressures.png',dpi=dpi)
+    if backup: 
+        return LPmean
 
-def plot_pressure_line(s,time,box,Ldt,h,w1=5,w2=200,dir='images/NparticlesGas/',date=' ',save=False):
+def plot_pressure_line(s,time,box,Ldt,h,w1=5,w2=200,dir='images/NparticlesGas/',date=' ',save=False, dpi=300):
     fig = plt.figure(figsize=(20,5))
     fig.suptitle('\nMean pressure vs time\n', fontsize=14)
     for i in range(len(Ldt)):
@@ -117,4 +121,30 @@ def plot_pressure_line(s,time,box,Ldt,h,w1=5,w2=200,dir='images/NparticlesGas/',
         plt.plot(time_P1,P_right1,'-',color='gray',lw=lw,alpha=alpha)
         plt.plot(time_P1,P_left1,'-',color='gray',lw=lw,alpha=alpha)
         plt.legend(loc='upper right')
-    if save: plt.savefig(dir+date+'pressures1.png',dpi=300)
+    if save: plt.savefig(dir+date+'pressures1.png',dpi=dpi)
+
+def plot_cumulative_momentum(s,time,box,h,w=500,kind=0,dir='images/NparticlesGas/',date=' ',save=False, dpi=300):
+    plt.figure(figsize=(8,6))
+    dt = 2*h
+    time_P, P_top, P_bottom, P_right, P_left = get_Pressures(s,time,box,dt)
+    Cp_top = np.cumsum(P_top*dt*box[0])
+    Cp_bottom = np.cumsum(P_bottom*dt*box[0])
+    Cp_right = np.cumsum(P_right*dt*box[1])
+    Cp_left = np.cumsum(P_left*dt*box[1])
+    
+    time_P1, Cp_top1 = moving_mean(time_P, Cp_top,w,kind)
+    time_P1, Cp_bottom1 = moving_mean(time_P,Cp_bottom,w,kind)
+    time_P1, Cp_right1 = moving_mean(time_P,Cp_right,w,kind)
+    time_P1, Cp_left1 = moving_mean(time_P,Cp_left,w,kind)
+    Cp_mean1 = (Cp_top1+Cp_bottom1+Cp_right1+Cp_left1)/4
+
+    plt.title('Cumulative Momentum', fontsize=14)
+    plt.ylabel(r'$\overline{p}$',fontsize=14)
+    plt.xlabel(r'$\overline{t}$',fontsize=14)
+    plt.plot(time_P1,Cp_top1,'-r',label='Top',lw=1)        #;plt.plot(time_P, Cp_top,'o',color='red',alpha=0.5, ms=1.5)
+    plt.plot(time_P1,Cp_bottom1,'-b',label='Bottom',lw=1)  #;plt.plot(time_P, Cp_bottom,'o',color='blue',alpha=0.5, ms=1.5)
+    plt.plot(time_P1,Cp_right1,'-g',label='Right',lw=1)    #;plt.plot(time_P, Cp_right,'o',color='green',alpha=0.5, ms=1.5)
+    plt.plot(time_P1,Cp_left1,'-m',label='Left',lw=1)      #;plt.plot(time_P, Cp_left,'o',color='magenta',alpha=0.5, ms=1.5)
+    plt.plot(time_P1,Cp_mean1,'-',color='cyan',label='Mean')
+    plt.legend(loc='upper left')
+    if save: plt.savefig(dir+date+'pressures2.png',dpi=dpi)
