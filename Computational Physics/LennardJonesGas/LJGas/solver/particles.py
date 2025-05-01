@@ -12,12 +12,13 @@ force between two particles at a distance R0 defined by the user)
 import numpy as np
 
 class LJGas:
-    def __init__(self,h=0.05,N=100,Np=2,R0=1.05,h0=0.01,box=[20,10],verbose=False):
+    def __init__(self,h=0.05,N=100,Np=2,R0=1.05,h0=0.01,box=[20,10],R1=3,kind=1,verbose=False):
         # Dynamic parameters
         self.h = h  # Time lapse between steps
         self.N = N   # Number of steps
         self.Np = Np    # Number of particles
-
+        self.R1 = R1   # Distance of interaction 
+        self.kind = kind
         # Other parameters
         self.h1 = self.h
         self.verbose = verbose
