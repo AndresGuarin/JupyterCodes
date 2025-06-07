@@ -4,7 +4,8 @@ Created on Fri Jan 17 14:18:00 2025
 
 import numpy as np
 import matplotlib.pyplot as plt
-from LJGas .analysis.visualization import moving_mean
+from LJGas.analysis.visualization import moving_mean
+from LJGas.analysis.math import discrete_diff
 
 def get_Pressures(s,time,box,dt):
     """ 
@@ -148,3 +149,4 @@ def plot_cumulative_momentum(s,time,box,h,w=500,kind=0,dir='images/NparticlesGas
     plt.plot(time_P1,Cp_mean1,'-',color='cyan',label='Mean')
     plt.legend(loc='upper left')
     if save: plt.savefig(dir+date+'pressures2.png',dpi=dpi)
+    return np.mean(discrete_diff(time_P1,Cp_mean1))/box[1]
