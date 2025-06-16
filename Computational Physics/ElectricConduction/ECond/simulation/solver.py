@@ -13,7 +13,7 @@ def BF(X,Y,t):
     return X*0 #In order: [Bz]
 
 class ECond:
-    def __init__(self,h=0.05,N=100,NL=1,NF=1,EField=EF,BField=BF,verbose=False):
+    def __init__(self,h=0.05,N=100,Np=1,EField=EF,BField=BF,verbose=False):
         """
             @params
                 EField: func. 
@@ -25,16 +25,11 @@ class ECond:
         # Dynamic parameters
         self.h = h    # Time lapse between steps
         self.N = N    # Number of steps
-        self.NL = NL  # Number of free particles
-        self.NF = NF  # Numer of fixed particles
-        self.Np = NL+NF # Total number of particles
-
+        self.Np = Np  # Number of free particles (electrons)
+        
         # Other parameters
-        self.h1 = self.h
         self.verbose = verbose
-
-        # Auxiliar parameters
-        self.IsFree = np.arange(self.Np) < self.Np-NF
+        self.aux = -1
 
         # Fields
         self.EField = EField
@@ -46,12 +41,10 @@ class ECond:
     # Functions
     def Fk(self,X,Y,Vx,Vy): #Force function
         # Associated matrixes of distance and force betweeen particles
-        I = np.eye(self.Np)
-        A, B = np.meshgrid(X,X); dX = A-B
-        A, B = np.meshgrid(Y,Y); dY = A-B
-        A, B = np.meshgrid(self.Q,self.Q); Q2 = A*B
-        R = np.sqrt(dX**2+dY**2) + I
-        F = Q2/R**2
+        A, B = np.meshgrid(X,np.concatenate([X,self.XC])); dX = A-B
+        A, B = np.meshgrid(Y,np.concatenate([Y,self.YC])); dY = A-B
+        R = np.sqrt(dX**2+dY**2) + self.I
+        F = self.Q2/R**2
         Ax1 = F*dX/R
         Ay1 = F*dY/R
 
@@ -66,7 +59,7 @@ class ECond:
         Ax += self.Q*(E[0] + Vy*B)
         Ay += self.Q*(E[1] - Vx*B)
 
-        return np.array([Vx, Vy, Ax*self.IsFree, Ay*self.IsFree])
+        return np.array([Vx, Vy, Ax, Ay])
 
     def simulate(self,CI):
         LX = np.zeros((self.N+1,self.Np))
@@ -79,6 +72,14 @@ class ECond:
         LVx[0] = CI[2]
         LVy[0] = CI[3]
         self.Q = CI[4]
+        self.XC = CI[5]
+        self.YC = CI[6]
+        self.QC = CI[7]
+        
+        # Auxiliar parameters of self.Fk
+        A, B = np.meshgrid(self.Q, np.concatenate([self.Q,self.QC]))
+        self.Q2 = A*B
+        self.I = np.eye(self.Np+len(self.XC))[:,:self.Np]
 
         for i in range(self.N):
             self.i = i
