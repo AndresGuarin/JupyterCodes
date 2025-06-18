@@ -13,7 +13,7 @@ def BF(X,Y,t):
     return X*0 #In order: [Bz]
 
 class ECond:
-    def __init__(self,h=0.05,N=100,Np=1,EField=EF,BField=BF,verbose=False):
+    def __init__(self,h=0.05,N=100,Np=1,EField=EF,BField=BF,R0=0.35,n=6,verbose=False):
         """
             @params
                 EField: func. 
@@ -26,10 +26,12 @@ class ECond:
         self.h = h    # Time lapse between steps
         self.N = N    # Number of steps
         self.Np = Np  # Number of free particles (electrons)
+        self.R0 = R0
+        self.n = n
         
         # Other parameters
         self.verbose = verbose
-        self.aux = -1
+        self.k = 2*R0**(n-2)/n
 
         # Fields
         self.EField = EField
@@ -40,18 +42,22 @@ class ECond:
 
     # Functions
     def Fk(self,X,Y,Vx,Vy): #Force function
-        # Associated matrixes of distance and force betweeen particles
-        A, B = np.meshgrid(X,np.concatenate([X,self.XC])); dX = A-B
-        A, B = np.meshgrid(Y,np.concatenate([Y,self.YC])); dY = A-B
-        R = np.sqrt(dX**2+dY**2) + self.I
-        F = self.Q2/R**2
-        Ax1 = F*dX/R
-        Ay1 = F*dY/R
+        # Force between the negative charges
+        A, B = np.meshgrid(X,X); dX = A-B
+        A, B = np.meshgrid(Y,Y); dY = A-B
+        R = np.sqrt(dX**2+dY**2) + np.eye(self.Np)
+        F = self.Q2_neg/R**2
+        Ax = np.sum(F*dX/R,axis=0)
+        Ay = np.sum(F*dY/R,axis=0)
 
-        # Flatten vectors
-        Ax = np.sum(Ax1,axis=0)
-        Ay = np.sum(Ay1,axis=0)
-        
+        # Force between the positive and the negative charges
+        A, B = np.meshgrid(X,self.XC); dX = A-B
+        A, B = np.meshgrid(Y,self.YC); dY = A-B
+        R = np.sqrt(dX**2+dY**2) 
+        F = self.Q2_pos*(1/R**2 - self.k/R**self.n)
+        Ax += np.sum(F*dX/R,axis=0)
+        Ay += np.sum(F*dY/R,axis=0)
+
         # Force due to an external field E and B with Ez=0, Bx=0, By=0
         E = self.EField(X,Y,self.h*self.i)
         B = self.BField(X,Y,self.h*self.i)
@@ -77,8 +83,9 @@ class ECond:
         self.QC = CI[7]
         
         # Auxiliar parameters of self.Fk
-        A, B = np.meshgrid(self.Q, np.concatenate([self.Q,self.QC]))
-        self.Q2 = A*B
+        A, B = np.meshgrid(self.Q, self.Q); self.Q2_neg = A*B
+        A, B = np.meshgrid(self.Q, self.QC); self.Q2_pos = A*B
+
         self.I = np.eye(self.Np+len(self.XC))[:,:self.Np]
 
         for i in range(self.N):
