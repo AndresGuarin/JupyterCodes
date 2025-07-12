@@ -16,10 +16,8 @@ class ECond:
     def __init__(self,h=0.05,N=100,Np=1,EField=EF,BField=BF,R0=0.35,n=6,verbose=False):
         """
             @params
-                EField: func. 
-                        It is a function of X,Y,t and it returns a list of the form [Ex, Ey]
-                BField: func.
-                        It is a function of X,Y,t and it retunrs Bz 
+                EField: func. It is a function of X,Y,t and it returns a list of the form [Ex, Ey]
+                BField: func. It is a function of X,Y,t and it retunrs Bz 
 
         """
         # Dynamic parameters
@@ -31,7 +29,8 @@ class ECond:
         
         # Other parameters
         self.verbose = verbose
-        self.k = 2*R0**(n-2)/n
+        #self.k = 2*R0**(n-2)/n
+        self.k = R0**(n-2)
 
         # Fields
         self.EField = EField

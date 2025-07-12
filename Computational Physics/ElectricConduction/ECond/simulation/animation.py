@@ -6,7 +6,8 @@ import matplotlib.pyplot as plt
 import matplotlib.animation as animation
 
 def animate_path(self,s,kind=0,save=False,name=None,verbose=True,
-                 plot_params=['-r','or',0.2,5.0,0.5],length=8,interval=100,dj=1,j0=1):
+                 plot_params=['-r','or',0.2,5.0,0.5],length=8,interval=100,dj=1,
+                 j0=1,L=10,ltraj=100):
     """
     Animates the positions of the particles of the system.
 
@@ -53,8 +54,9 @@ def animate_path(self,s,kind=0,save=False,name=None,verbose=True,
     def update(j):
         if kind==0:
                 ax.clear() # Clear the before plot
+                jmin = np.max([0,j-ltraj])
                 for i in range(self.Np):
-                      plt.plot(LX[:j,i],LY[:j,i],fmt1,lw=lw1,alpha=alpha1); # Trajectories
+                      plt.plot(LX[jmin:j,i],LY[jmin:j,i],fmt1,lw=lw1,alpha=alpha1); # Trajectories
                       plt.plot(LX[j,i], LY[j,i], fmt2,ms=ms1)               # Positions
                 plt.plot(self.XC,self.YC,'ob')                              # Positive Cores
                 plt.plot(np.mean(LX[j,:]),np.mean(LY[j,:]),'xg',ms=5)
@@ -65,7 +67,8 @@ def animate_path(self,s,kind=0,save=False,name=None,verbose=True,
         else:
               for i in range(self.Np):
                     plt.plot(LX[j-1:j+1,i],LY[j-1:j+1,i],fmt1,lw=lw1,alpha=alpha1); # Trajectories
-        
+        plt.xlim(-L,L)
+        plt.ylim(-L,L)
         if verbose: plt.legend(loc='upper right')
     
     # Create figure and axis
