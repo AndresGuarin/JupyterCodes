@@ -5,7 +5,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.animation as animation
 
-def animate_path(self,s,duration=5,kind=0,save=False,name=None,verbose=True,
+def animate_path(self,s,dj=1,kind=0,save=False,name=None,verbose=True,
                  plot_params=['-b','or',0.5,5,0.5],amp=1,length=8,interval=40):
     """
     Animates the positions of the particles of the system.
@@ -13,7 +13,7 @@ def animate_path(self,s,duration=5,kind=0,save=False,name=None,verbose=True,
     @params:
         self : self object. It contains the data of LJGas.solver.particles object.
         s : array-like. It contains the positions and velocities of the particles.
-        duration : float. Time in seconds of the simulation.
+        dj: int. Steps of the iteration function of the animation.
         kind : int. If it is 0, then we plot lines and point. If it is 1, we plot
             only lines
         save : bool. If it is true the animation is saved in pc.
@@ -77,6 +77,11 @@ def animate_path(self,s,duration=5,kind=0,save=False,name=None,verbose=True,
                 plt.plot(LX1[:j,i],LY1[:j,i],fmt1,lw=lw1,alpha=alpha1); ax.plot(LX1[j,i], LY1[j,i], fmt2,ms=ms1) #positions
         if kind==1: 
             for i in range(self.Np): ax.plot(LX1[j,i], LY1[j,i], fmt2,ms=ms1)
+        if kind==2:
+            for i in range(self.Np//2):
+                plt.plot(LX1[:j,i],LY1[:j,i],fmt1,lw=lw1,alpha=alpha1); ax.plot(LX1[j,i], LY1[j,i], fmt2,ms=ms1) #positions
+            for i in range(self.Np//2,self.Np):
+                plt.plot(LX1[:j,i],LY1[:j,i],'-r',lw=lw1,alpha=alpha1); ax.plot(LX1[j,i], LY1[j,i], 'o', color='orange',ms=ms1*0.6) #positions
         plt.plot(0,0,'o',ms=0, label=r'$n=$'+f'{j}\n'+r'$\overline{t}=$ '+f'{np.round(time1[j],1)}') #legends
         plt.plot([-b0,b0,b0,-b0,-b0],[-b1,-b1,b1,b1,-b1],'-b',lw=2) #box
         if verbose: plt.legend(loc='upper right')
@@ -86,13 +91,8 @@ def animate_path(self,s,duration=5,kind=0,save=False,name=None,verbose=True,
     fig = plt.figure(figsize=(length*1.1,heigth))
     ax = fig.gca()
     
-    # Set the steps of the animation
-    local_time = interval/100   # Empirical time in seconds that matplotlib.pyplot lasts for each plot of the animation
-    Nf = LX1.shape[0]
-    dj = int(Nf*local_time/duration)
-    
     # Animate the movement
-    anim = animation.FuncAnimation(fig,update,range(1,Nf,dj), repeat=False, interval=interval)
+    anim = animation.FuncAnimation(fig,update,range(1,LX1.shape[0],dj), repeat=False, interval=interval)
     if save: anim.save(name,writer='ffmpeg')
     return anim
     #plt.show(ani)
