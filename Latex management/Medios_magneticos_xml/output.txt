@@ -1,0 +1,12 @@
+Chasles, M. \cite{chasles1837apercu} es el primero en encontrar que el óvalo de Descartes puede describirse como lugar geométrico con respecto a un tercer foco. Es decir, que al tomar el óvalo como lugar geométricos de puntos cuya distancia ponderada a dos focos es constante, es posible encontrar un tercer punto para el cual la suma de distancias ponderadas también es constante. Si consideramos que $r''$ es la distancia de un punto del óvalo a un tercer foco $F''$, como en la figura \cref{fig:tercer_foco}, entonces un óvalo dado por $r+ar'=u$ también puede describirse mediante ecuaciones de la forma $r'+\alpha r'' = \beta$ y $r+\lambda r'' = \sigma$, con $\alpha$, $\beta$, $\lambda$ y $\sigma$ constantes que dependen de $a$, $u$ y $\tau$. Así, un mismo óvalo puede describirse mediante tres ecuaciones bipolares. En \cite{williamson1873elementary} y \cite{chasles1837apercu} se hacen uso de construcciones geométricas para demostrar la existencia de este tercer foco. Aquí se hace un procedimiento algebraico que recupera lo presentado en \cite{johnson1875bipolar}. 
+
+<figura id="fig:tercer_foco">
+    <ruta>Figures/Tercer_foco.png</ruta>
+    <caption>
+        El óvalo de Descartes con sus tres focos $F$, $F'$ y $F''$. Con estos y con un punto conocido $M$ sobre la curva es posible encontrar los valores de $a$ y $u$ para reconstruir la curva.
+    </caption>
+</figura>
+Para empezar, se reescribe la ecuación polar del óvalo de Descartes \cref{eq:ec_polar} como 
+\be
+	a^2\rob{r^2+\tau^2-2r\tau\cos\theta} = (u-r)^2\,. \label{eq:ec_polar_aux}
+\ee

@@ -1,0 +1,6 @@
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width = 0.6 \linewidth]{Figures/Tercer_foco.png}
+    \caption{El óvalo de Descartes con sus tres focos $F$, $F'$ y $F''$. Con estos y con un punto conocido $M$ sobre la curva es posible encontrar los valores de $a$ y $u$ para reconstruir la curva.}
+    \label{fig:tercer_foco}
+\end{figure}
