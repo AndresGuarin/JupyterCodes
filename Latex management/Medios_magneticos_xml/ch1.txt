@@ -1,13 +1,27 @@
-Chasles, M. \cite{chasles1837apercu} es el primero en encontrar que el óvalo de Descartes puede describirse como lugar geométrico con respecto a un tercer foco. Es decir, que al tomar el óvalo como lugar geométricos de puntos cuya distancia ponderada a dos focos es constante, es posible encontrar un tercer punto para el cual la suma de distancias ponderadas también es constante. Si consideramos que $r''$ es la distancia de un punto del óvalo a un tercer foco $F''$, como en la figura \cref{fig:tercer_foco}, entonces un óvalo dado por $r+ar'=u$ también puede describirse mediante ecuaciones de la forma $r'+\alpha r'' = \beta$ y $r+\lambda r'' = \sigma$, con $\alpha$, $\beta$, $\lambda$ y $\sigma$ constantes que dependen de $a$, $u$ y $\tau$. Así, un mismo óvalo puede describirse mediante tres ecuaciones bipolares. En \cite{williamson1873elementary} y \cite{chasles1837apercu} se hacen uso de construcciones geométricas para demostrar la existencia de este tercer foco. Aquí se hace un procedimiento algebraico que recupera lo presentado en \cite{johnson1875bipolar}. 
-
-\begin{figure}[ht]
-    \centering
-    \includegraphics[width = 0.6 \linewidth]{Figures/Tercer_foco.png}
-    \caption{El óvalo de Descartes con sus tres focos $F$, $F'$ y $F''$. Con estos y con un punto conocido $M$ sobre la curva es posible encontrar los valores de $a$ y $u$ para reconstruir la curva.}
-    \label{fig:tercer_foco}
-\end{figure}
-
-Para empezar, se reescribe la ecuación polar del óvalo de Descartes \cref{eq:ec_polar} como 
+Como se verá en el siguiente capítulo, conocer la intersección entre el óvalo y la sinécdola es clave para construir el sistema de coordenadas ovoidales. En particular, se verá que estas intersecciones darán lugar a las relaciones entre las coordenadas cartesianas y las coordenadas ovoidales. Por lo pronto, esta sección se enfoca en hallar dichas intersecciones. Para esto, se debe resolver el sistema $2\times 2$ dado por
+\begin{subequations}
+	\label{eq:oval_sinec_intersec}
+    \begin{align}
+        \sqrt{x^2 + y^2} + a \sqrt{(x-\tau)^2 + y^2} &= u\,, \label{eq:oval_intersec} \\
+        \arcsenh\left(\frac{x}{y} \right) + a\, \arcsenh\left(\frac{x-\tau}{y} \right) &= v\,. \label{eq:sinec_intersec}
+    \end{align}
+\end{subequations} 
+La solución a este sistema debe relacionar a $x$ y $y$ como funciones de $u$ y $v$. Para simplificar el problema, se puede hacer uso de las ecuaciones paramétricas \cref{eq:sinec_param_y(t)} y \cref{eq:sinec_param_x(t)}. Al sustituir estas ecuaciones, se encuentra que la ecuación \cref{eq:sinec_intersec} se satisface idénticamente, dando lugar a la ecuación $v=v$. Pero, por su parte, la ecuación \cref{eq:oval_intersec} pasa a ser
 \be
-	a^2\rob{r^2+\tau^2-2r\tau\cos\theta} = (u-r)^2\,. \label{eq:ec_polar_aux}
+	\frac{|\tau| \left(\cosh{t}+a \cosh\left(\frac{v-t}{a}\right)\right)}{\left|\senh{t}-\senh\left(\frac{v-t}{a}\right)\right|} = u\,. \label{eq:intersect_t}
 \ee
+Así, el sistema de ecuaciones $2\times 2$ se reduce a resolver esta ecuación para $t$.
+
+Una forma de eliminar los valores absolutos de la ecuación \cref{eq:intersect_t} consiste en elevar a ambos lados al cuadrado. Sin embargo, se encuentra que esta estrategia conduce a grandes complicaciones al hacer que la solución sea más compleja. En su lugar, uno se da cuenta de que la expresión con valor absoluto es precisamente igual a $|y|$, con $y$ dado por la ecuación \cref{eq:sinec_param_y(t)}. Así, al considerar $y>0$ o $y<0$, se pueden eliminar los valores absolutos de la ecuación \cref{eq:intersect_t}. Hacer esto es equivalente a buscar intersecciones del óvalo y la sinécdola sobre el semi-plano $y>0$ o sobre el semi-plano $y<0$. 
+
+En el apéndice \cref{sec:appendix_sinec}, se encuentra además que la condición que debe cumplir $t$ para obtener $y>0$ es que $\rob{t-\frac{v}{a+1}}\tau\mathcal{S}(a)>0$ si $a\neq -1,0$ y $v\tau>0$ si $a=-1$, con $\mathcal{S}(a):=\left|a+\frac{1}{2}\right|-\frac{1}{2}$. El caso $a=0$ se excluye porque en este las ecuaciones paramétricas \cref{eq:sinec_param_y(t)} y \cref{eq:sinec_param_x(t)} no funcionan. Por consistencia, la condición resultante para $t$ debe ser verificada luego de hallar una solución a la ecuación \cref{eq:intersect_t} con $|y|=y$. En algunos casos donde se tiene certeza de que existe una intersección y donde se encuentra una única solución real para $t$, esta verificación puede obviarse.
+
+Así, al evaluar $|y|=y$ en la ecuación \cref{eq:intersect_t} y al considerar el cambio de variable $t=\ln(s)$, con $s>0$, se encuentra
+\be 
+	(a\tau-u)s^{\frac{2}{a}}+ \e^{\frac{v}{a}}(\tau-u)s^{\frac{1}{a}+1} + \e^{\frac{v}{a}}(\tau+u)s^{\frac{1}{a}-1}+\e^{\frac{2v}{a}}(a\tau+u) = 0\,. \label{eq:s}
+\ee
+Debido a su importancia, esta ecuación será llamada también como \textit{ecuación} $s$. Es fácil ver que al evaluar $|y|=-y$ en la ecuación \cref{eq:intersect_t}, se obtiene la misma ecuación $s$, pero con $u$ intercambiado por $-u$. De este modo, el problema de resolver la ecuación \cref{eq:intersect_t} se reduce a resolver solamente la ecuación \cref{eq:s} para valores positivos de $s$.
+
+En el apéndice \cref{sec:appendix_sinec}, se encuentra que esta ecuación siempre puede reescribirse como una ecuación algebraica en una potencia de $s$ al tomar $a\in\mathbb{Q}$. Así, usando las soluciones conocidas a las ecuaciones algebraicas, es posible resolver la ecuación \cref{eq:s} para valores definidos y racionales de $a$. Encontrar una solución general, para un valor indeterminado de $a$, es muy complicado, pues esto sería equivalente a resolver una ecuación algebraica de grado $n-$ésimo para un valor indeterminado de $n$. 
+
+Así mismo, en este mismo apéndice, se encuentra que la ecuación \cref{eq:s} siempre tiene al menos una solución positiva si $a$ es un número racional positivo o un número racional menor o igual que $-1$ (cf. sección \cref{sec:appendixTheorem}). Con lo cual, el óvalo y la sinécdola siempre se intersecan al menos para estos valores de $a$. Además, en este mismo apéndice, se encuentran las soluciones de la ecuación \cref{eq:s} para $a=1$ y $a=\frac{1}{3}$. En cada caso, se encuentra además la solución positiva de $s$.
