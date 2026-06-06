@@ -13,7 +13,7 @@ def BF(X,Y,t):
     return X*0 #In order: [Bz]
 
 class ECond:
-    def __init__(self,h=0.05,N=100,Np=1,EField=EF,BField=BF,R0=0.35,n=6,verbose=False):
+    def __init__(self,h=0.05,N=100,Np=1,EField=EF,BField=BF,gamma=0.1,verbose=False):
         """
             @params
                 EField: func. It is a function of X,Y,t and it returns a list of the form [Ex, Ey]
@@ -24,28 +24,26 @@ class ECond:
         self.h = h    # Time lapse between steps
         self.N = N    # Number of steps
         self.Np = Np  # Number of free particles (electrons)
-        self.R0 = R0
-        self.n = n
         
         # Other parameters
         self.verbose = verbose
-        #self.k = 2*R0**(n-2)/n
-        self.k = R0**(n-2)
 
-        # Fields
+        # Physicall parameters
         self.EField = EField
         self.BField = BField
+        self.gamma = gamma
 
     def get_self(self):
         return self
 
     # Functions
     def Fk(self,X,Y,Vx,Vy): #Force function
+
         # Force between the negative charges
         A, B = np.meshgrid(X,X); dX = A-B
         A, B = np.meshgrid(Y,Y); dY = A-B
         R = np.sqrt(dX**2+dY**2) + np.eye(self.Np)
-        F = self.Q2_neg/R**2
+        F = 1/R**2
         Ax = np.sum(F*dX/R,axis=0)
         Ay = np.sum(F*dY/R,axis=0)
 
@@ -53,9 +51,9 @@ class ECond:
         E = self.EField(X,Y,self.h*self.i)
         B = self.BField(X,Y,self.h*self.i)
 
-        # Final accelerations
-        Ax += self.Q*(E[0] + Vy*B)
-        Ay += self.Q*(E[1] - Vx*B)
+        #Final accelerations
+        Ax += self.Q*(E[0] + Vy*B) - self.gamma*Vx
+        Ay += self.Q*(E[1] - Vx*B) - self.gamma*Vy
 
         return np.array([Vx, Vy, Ax, Ay])
 
@@ -69,17 +67,8 @@ class ECond:
         LY[0] = CI[1]
         LVx[0] = CI[2]
         LVy[0] = CI[3]
-        self.Q = CI[4]
-        self.XC = CI[5]
-        self.YC = CI[6]
-        self.QC = CI[7]
+        self.Q = -1
         
-        # Auxiliar parameters of self.Fk
-        A, B = np.meshgrid(self.Q, self.Q); self.Q2_neg = A*B
-        A, B = np.meshgrid(self.Q, self.QC); self.Q2_pos = A*B
-
-        self.I = np.eye(self.Np+len(self.XC))[:,:self.Np]
-
         for i in range(self.N):
             self.i = i
             next_val = self.next_value(LX[i],LY[i],LVx[i],LVy[i])
@@ -160,7 +149,7 @@ class ECond:
             I = np.eye(self.Np)
             A, B = np.meshgrid(X,X); dX = A-B
             A, B = np.meshgrid(Y,Y); dY = A-B 
-            A, B = np.meshgrid(self.Q,self.Q); Q2 = A*B
+            A, B = self.Q**2*np.meshgrid(np.ones(self.Np),np.ones(self.Np)); Q2 = A*B
             R = np.sqrt(dX**2+dY**2) + I
             Vi = (Q2/R)*(np.eye(self.Np)==0)
             Eki = 1/2*(Vx**2+Vy**2)

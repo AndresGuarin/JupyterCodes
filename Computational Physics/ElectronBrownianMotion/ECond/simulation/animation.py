@@ -60,7 +60,6 @@ def animate_path(self,s,kind=0,save=False,name=None,verbose=True,
                 for i in range(self.Np):
                       plt.plot(LX[jmin:j,i],LY[jmin:j,i],fmt1,lw=lw1,alpha=alpha1); # Trajectories
                       plt.plot(LX[j,i], LY[j,i], fmt2,ms=ms1)               # Positions
-                plt.plot(self.XC,self.YC,'ob')                              # Positive Cores
                 plt.plot(np.mean(LX[j,:]),np.mean(LY[j,:]),'xg',ms=5)
                 plt.plot(0,0,'o',ms=0, label=r'$n=$'+f'{j}\n'+r'$\overline{t}=$ '+f'{np.round(time[j],1)}') # Legends
         elif kind==1:
@@ -74,12 +73,13 @@ def animate_path(self,s,kind=0,save=False,name=None,verbose=True,
         if verbose: plt.legend(loc='upper right')
     
     # Create figure and axis
-    fig = plt.figure(figsize=(length*1.1,length))
+    fig = plt.figure(figsize=(length,length))
     ax = fig.gca()
-    plt.plot(self.XC,self.YC,'ob')                              # Positive Cores
-
+    
     # Animate the movement
     anim = animation.FuncAnimation(fig,update,range(j0,LX.shape[0],dj), repeat=False, interval=interval)
     if save: anim.save(name,writer='ffmpeg')
     return anim
     #plt.show(ani)
+
+
