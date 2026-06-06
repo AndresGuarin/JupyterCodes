@@ -1,27 +1,1463 @@
-Como se verá en el siguiente capítulo, conocer la intersección entre el óvalo y la sinécdola es clave para construir el sistema de coordenadas ovoidales. En particular, se verá que estas intersecciones darán lugar a las relaciones entre las coordenadas cartesianas y las coordenadas ovoidales. Por lo pronto, esta sección se enfoca en hallar dichas intersecciones. Para esto, se debe resolver el sistema $2\times 2$ dado por
-\begin{subequations}
-	\label{eq:oval_sinec_intersec}
-    \begin{align}
-        \sqrt{x^2 + y^2} + a \sqrt{(x-\tau)^2 + y^2} &= u\,, \label{eq:oval_intersec} \\
-        \arcsenh\left(\frac{x}{y} \right) + a\, \arcsenh\left(\frac{x-\tau}{y} \right) &= v\,. \label{eq:sinec_intersec}
-    \end{align}
-\end{subequations} 
-La solución a este sistema debe relacionar a $x$ y $y$ como funciones de $u$ y $v$. Para simplificar el problema, se puede hacer uso de las ecuaciones paramétricas \cref{eq:sinec_param_y(t)} y \cref{eq:sinec_param_x(t)}. Al sustituir estas ecuaciones, se encuentra que la ecuación \cref{eq:sinec_intersec} se satisface idénticamente, dando lugar a la ecuación $v=v$. Pero, por su parte, la ecuación \cref{eq:oval_intersec} pasa a ser
-\be
-	\frac{|\tau| \left(\cosh{t}+a \cosh\left(\frac{v-t}{a}\right)\right)}{\left|\senh{t}-\senh\left(\frac{v-t}{a}\right)\right|} = u\,. \label{eq:intersect_t}
-\ee
-Así, el sistema de ecuaciones $2\times 2$ se reduce a resolver esta ecuación para $t$.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%% MATHEMATICS
 
-Una forma de eliminar los valores absolutos de la ecuación \cref{eq:intersect_t} consiste en elevar a ambos lados al cuadrado. Sin embargo, se encuentra que esta estrategia conduce a grandes complicaciones al hacer que la solución sea más compleja. En su lugar, uno se da cuenta de que la expresión con valor absoluto es precisamente igual a $|y|$, con $y$ dado por la ecuación \cref{eq:sinec_param_y(t)}. Así, al considerar $y>0$ o $y<0$, se pueden eliminar los valores absolutos de la ecuación \cref{eq:intersect_t}. Hacer esto es equivalente a buscar intersecciones del óvalo y la sinécdola sobre el semi-plano $y>0$ o sobre el semi-plano $y<0$. 
+%%%% Solving the algebraic equation of Nth degree
+@article{Sturmfels2000,
+title = {Solving algebraic equations in terms of A-hypergeometric series},
+journal = {Discrete Mathematics},
+volume = {210},
+number = {1},
+pages = {171-181},
+year = {2000},
+issn = {0012-365X},
+doi = {https://doi.org/10.1016/S0012-365X(99)00126-0},
+author = {Sturmfels, B.},
+}
 
-En el apéndice \cref{sec:appendix_sinec}, se encuentra además que la condición que debe cumplir $t$ para obtener $y>0$ es que $\rob{t-\frac{v}{a+1}}\tau\mathcal{S}(a)>0$ si $a\neq -1,0$ y $v\tau>0$ si $a=-1$, con $\mathcal{S}(a):=\left|a+\frac{1}{2}\right|-\frac{1}{2}$. El caso $a=0$ se excluye porque en este las ecuaciones paramétricas \cref{eq:sinec_param_y(t)} y \cref{eq:sinec_param_x(t)} no funcionan. Por consistencia, la condición resultante para $t$ debe ser verificada luego de hallar una solución a la ecuación \cref{eq:intersect_t} con $|y|=y$. En algunos casos donde se tiene certeza de que existe una intersección y donde se encuentra una única solución real para $t$, esta verificación puede obviarse.
+@article{bagis2022,
+  title={Solution of Polynomial Equations with Nested Radicals}, 
+  author={Bagis, N.},
+  journal={arXiv preprint arXiv:1406.1948},
+  year={2022},
+  url={https://arxiv.org/abs/1406.1948}, 
+}
 
-Así, al evaluar $|y|=y$ en la ecuación \cref{eq:intersect_t} y al considerar el cambio de variable $t=\ln(s)$, con $s>0$, se encuentra
-\be 
-	(a\tau-u)s^{\frac{2}{a}}+ \e^{\frac{v}{a}}(\tau-u)s^{\frac{1}{a}+1} + \e^{\frac{v}{a}}(\tau+u)s^{\frac{1}{a}-1}+\e^{\frac{2v}{a}}(a\tau+u) = 0\,. \label{eq:s}
-\ee
-Debido a su importancia, esta ecuación será llamada también como \textit{ecuación} $s$. Es fácil ver que al evaluar $|y|=-y$ en la ecuación \cref{eq:intersect_t}, se obtiene la misma ecuación $s$, pero con $u$ intercambiado por $-u$. De este modo, el problema de resolver la ecuación \cref{eq:intersect_t} se reduce a resolver solamente la ecuación \cref{eq:s} para valores positivos de $s$.
+@article{glasser1994,
+  title={The quadratic formula made hard: A less radical approach to solving equations}, 
+  author={M. Lawrence Glasser},
+  year={1994},
+  journal={arXiv preprint math/9411224},
+  url={https://arxiv.org/abs/math/9411224}
+}
 
-En el apéndice \cref{sec:appendix_sinec}, se encuentra que esta ecuación siempre puede reescribirse como una ecuación algebraica en una potencia de $s$ al tomar $a\in\mathbb{Q}$. Así, usando las soluciones conocidas a las ecuaciones algebraicas, es posible resolver la ecuación \cref{eq:s} para valores definidos y racionales de $a$. Encontrar una solución general, para un valor indeterminado de $a$, es muy complicado, pues esto sería equivalente a resolver una ecuación algebraica de grado $n-$ésimo para un valor indeterminado de $n$. 
+%%%%%%%%%%%% Inversion of a curve
+@inbook{weber1950electromagnetic,
+  title={Electromagnetic Fields. Theory and applications},
+  chapter={Three-dimensional analytic solutions},
+  pages={503--509},
+  author={Weber, E.},
+  volume={1},
+  year={1950},
+  publisher={Wiley}
+}
 
-Así mismo, en este mismo apéndice, se encuentra que la ecuación \cref{eq:s} siempre tiene al menos una solución positiva si $a$ es un número racional positivo o un número racional menor o igual que $-1$ (cf. sección \cref{sec:appendixTheorem}). Con lo cual, el óvalo y la sinécdola siempre se intersecan al menos para estos valores de $a$. Además, en este mismo apéndice, se encuentran las soluciones de la ecuación \cref{eq:s} para $a=1$ y $a=\frac{1}{3}$. En cada caso, se encuentra además la solución positiva de $s$.
+@article{wrinch1932cix,
+  title={{CIX. Some problems concerned with inverted prolate spheroids}},
+  author={Wrinch, D. M.},
+  journal={The London, Edinburgh, and Dublin Philosophical Magazine and Journal of Science},
+  volume={14},
+  number={95},
+  pages={1061--1070},
+  year={1932},
+  publisher={Taylor \& Francis}
+}
+
+@inbook{darboux1910leccons,
+  title={Le{\c{c}}ons sur les systemes orthogonaux et les coordonn{\'e}es curvilignes},
+    chapter={Recherche des systèmes isothermes et d'autres systèmes qui se présentent dans la théorie de la chaleur
+},
+  author={Darboux, G.},
+  year={1910},
+  publisher={Gauthier-Villars},
+  pages={277}
+}
+
+%%%%%%%%%%%% Conformal transformations
+@article{moon1951cylindrical,
+  title={Cylindrical and rotational coordinate systems},
+  author={Moon, P. and Spencer, D. E.},
+  journal={Journal of the Franklin Institute},
+  volume={252},
+  number={4},
+  pages={327--344},
+  year={1951},
+  publisher={Citeseer}
+}
+
+@article{moon1953some,
+  title={Some coordinate systems associated with elliptic functions},
+  author={Moon, P. and Spencer, D. E.},
+  journal={Journal of the Franklin Institute},
+  volume={255},
+  number={6},
+  pages={531--543},
+  year={1953},
+  publisher={Elsevier}
+}
+
+%%%%%%%%%%
+
+@inbook{zwillinger2002crc,
+  title={CRC Standard Mathematical Tables and Formulae},
+  chapter = {2.3 Polynomials},
+  author={Zwillinger, D.},
+  isbn={9781420035346},
+  series={Advances in Applied Mathematics},
+  year={2003},
+  edition = {31st ed.},
+  publisher={CRC Press LLC}
+}
+
+@book{lanczos2012variational,
+  title={The Variational Principles of Mechanics},
+  author={Lanczos, C.},
+  isbn={9780486134703},
+  series={Dover Books on Physics},
+  url={https://books.google.com.co/books?id=cmPDAgAAQBAJ},
+  year={2012},
+  publisher={Dover Publications}
+}
+
+@book{borisenko2012vector,
+  title={Vector and Tensor Analysis with Applications},
+  author={Borisenko, A. I. and Tarapov, I. E. and Silverman, R. A.},
+  isbn={9780486131900},
+  series={Dover Books on Mathematics},
+  url={https://books.google.com.co/books?id=8eO7AQAAQBAJ},
+  year={2012},
+  publisher={Dover Publications}
+}
+
+@book{lee2019introduction,
+  title={Introduction to Riemannian Manifolds},
+  author={Lee, J. M.},
+  isbn={9783319917559},
+  series={Graduate Texts in Mathematics},
+  url={https://books.google.com.co/books?id=VUOCDwAAQBAJ},
+  year={2019},
+  publisher={Springer International Publishing}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%% GENERAL RELATIVITY
+@article{gutierrez2024c,
+  title={{$C^3$} Matching Conditions for Anisotropic Fluids},
+  author={Guti{\'e}rrez-Pi{\~n}eres, A. C. and Quevedo, H.},
+  journal={International Journal of Theoretical Physics},
+  volume={63},
+  number={9},
+  pages={218},
+  year={2024},
+  publisher={Springer}
+}
+
+@book{darmois1927memorial,
+  title={Memorial des sciences mathematique: fascicule XXV: les equations de la gravitation einsteinienne},
+  author={Darmois, G.},
+  year={1927},
+  publisher={Gauthier-Villars Paris}
+}
+
+@book{darmois1927equations,
+  title={Les {\'e}quations de la gravitation einsteinienne},
+  author={Darmois, G.},
+  number={25},
+  year={1927}
+}
+
+
+%%%%%%%%% Some spherical fluid solutions
+@article{schwarzschild1916fluid,
+  title={{\"U}ber das Gravitationsfeld einer Kugel aus inkompressibler Fl{\"u}ssigkeit nach der Einsteinschen Theorie},
+  author={Schwarzschild, K.},
+  journal={Sitzungsberichte der k{\"o}niglich preu{\ss}ischen Akademie der Wissenschaften zu Berlin},
+  pages={424--434},
+  year={1916}
+}
+
+@article{tolman1939static,
+  title={Static solutions of Einstein's field equations for spheres of fluid},
+  author={Tolman, R. C.},
+  journal={Physical Review},
+  volume={55},
+  number={4},
+  pages={364},
+  year={1939},
+  publisher={APS}
+}
+
+@article{buchdahl1956reciprocal,
+  title={Reciprocal static solutions of the equations of the gravitational field},
+  author={Buchdahl, H. A.},
+  journal={Australian Journal of Physics},
+  volume={9},
+  number={1},
+  pages={13--18},
+  year={1956},
+  publisher={CSIRO Publishing}
+}
+
+%%%%%%%%% Some vaccum solutions
+%Nota: Kerr-Newman es con carga
+
+%Papapetrou
+@article{papapetrou1953rotationssymmetrische,
+  title={Eine rotationssymmetrische L{\"o}sung in der allgemeinen Relativit{\"a}tstheorie},
+  author={Papapetrou, A.},
+  journal={Annalen der Physik},
+  volume={447},
+  number={4-6},
+  pages={309--315},
+  year={1953},
+  publisher={Wiley Online Library}
+}
+
+%Taub-NUT
+@article{newman1963empty,
+  title={Empty-space generalization of the Schwarzschild metric},
+  author={Newman, E. and Tamburino, L. and Unti, T.},
+  journal={Journal of Mathematical Physics},
+  volume={4},
+  number={7},
+  pages={915--923},
+  year={1963},
+  publisher={American Institute of Physics}
+}
+
+%Kerr-Schild
+@article{kerr1965new,
+  title={A new class of vacuum solutions of the Einstein field equations},
+  author={Kerr, R. P. and Schild, A.},
+  journal={IV Centenario Della Nascita di Galileo Galilei, 1564-1964},
+  pages={222},
+  year={1965}
+}
+
+
+%%%%%%%%% Axissymetric Stationary with rigid rotation
+@article{wahlquist1968interior,
+  title={Interior solution for a finite rotating body of perfect fluid},
+  author={Wahlquist, H. D.},
+  journal={Physical Review},
+  volume={172},
+  number={5},
+  pages={1291},
+  year={1968},
+  publisher={APS}
+}
+
+@article{kramer1984new,
+  title={A new solution for a rotating perfect fluid in general relativity},
+  author={Kramer, D.},
+  journal={Classical and Quantum Gravity},
+  volume={1},
+  number={1},
+  pages={L3},
+  year={1984},
+  publisher={IOP Publishing}
+}
+
+@article{kyriakopoulos1988class,
+  title={A class of solutions of Einstein's equations for the interior of a rigidly rotating perfect fluid},
+  author={Kyriakopoulos, E.},
+  journal={General relativity and gravitation},
+  volume={20},
+  number={5},
+  pages={427--436},
+  year={1988},
+  publisher={Springer}
+}
+
+@article{herlt1988stationary,
+  title={Stationary axisymmetric perfect fluid solutions in general relativity},
+  author={Herlt, E.},
+  journal={General relativity and gravitation},
+  volume={20},
+  number={7},
+  pages={635--646},
+  year={1988},
+  publisher={Springer}
+}
+
+@incollection{senovilla2005stationary,
+  title={Stationary and axisymmetric perfect-fluid solutions to Einstein's equations},
+  author={Senovilla, J. M. M.},
+  booktitle={Rotating Objects and Relativistic Physics: Proceedings of the El Escorial Summer School on Gravitation and General Relativity 1992: Rotating Objects and Other Topics Held at El Escorial, Spain, 24--28 August 1992},
+  pages={73--88},
+  year={2005},
+  publisher={Springer}
+}
+
+%%%%%%%%% Axissymetric Stationary with diferential rotation
+@article{chinea1990interior,
+  title={Interior gravitational field of a stationary, axially symmetric perfect fluid in irrotational motion},
+  author={Chinea, F. J. and González-Romero, L. M.},
+  journal={Classical and Quantum Gravity},
+  volume={7},
+  number={5},
+  pages={L99},
+  year={1990},
+  publisher={IOP Publishing}
+}
+
+@article{senovilla1992new,
+  title={New family of stationary and axisymmetric perfect-fluid solutions},
+  author={Senovilla, J. M. M.},
+  journal={Classical and Quantum Gravity},
+  volume={9},
+  number={11},
+  pages={L167},
+  year={1992},
+  publisher={IOP Publishing}
+}
+
+@article{chinea1993differentially,
+  title={A differentially rotating perfect fluid},
+  author={Chinea, F. J.},
+  journal={Classical and Quantum Gravity},
+  volume={10},
+  number={12},
+  pages={2539},
+  year={1993},
+  publisher={IOP Publishing}
+}
+
+@article{garcia1994new,
+  title={A new stationary axisymmetric perfect fluid type D solution with differential rotation},
+  author={Garc{\'\i}a, A.},
+  journal={Classical and Quantum Gravity},
+  volume={11},
+  number={3},
+  pages={L45},
+  year={1994},
+  publisher={IOP Publishing}
+}
+
+@article{gonzalez1994rotating,
+  title={Rotating barotropes and baroclines in general relativity},
+  author={González-Romero, L. M.},
+  journal={Classical and Quantum Gravity},
+  volume={11},
+  number={11},
+  pages={2741},
+  year={1994},
+  publisher={IOP Publishing}
+}
+
+%%%%%%%%% Quadrupole solutions
+@article{erez1959gravitational,
+  title={The gravitational field of a particle possessing a multipole moment},
+  author={Erez, G. and Rosen, N.},
+  year={1959},
+  journal      = {Bull. Research Council Israel},
+  volume       = {Vol: Sect. F.8},
+}
+
+@article{tomimatsu1973new,
+  title={New series of exact solutions for gravitational fields of spinning masses},
+  author={Tomimatsu, A. and Sato, H.},
+  journal={Progress of Theoretical Physics},
+  volume={50},
+  number={1},
+  pages={95--110},
+  year={1973},
+  publisher={Oxford University Press}
+}
+
+@article{hernandez1994monopole,
+  title={Monopole-quadrupole static axisymmetric solutions of Einstein field equations},
+  author={Hernández-Pastora, J. L. and Martín, J.},
+  journal={General Relativity and Gravitation},
+  volume={26},
+  number={9},
+  pages={877--907},
+  year={1994},
+  publisher={Springer}
+}
+
+@article{quevedo2011mass,
+  title={Mass quadrupole as a source of naked singularities},
+  author={Quevedo, H.},
+  journal={International Journal of Modern Physics D},
+  volume={20},
+  number={10},
+  pages={1779--1787},
+  year={2011},
+  publisher={World Scientific}
+}
+
+@article{quevedo2011exterior,
+  title={Exterior and interior metrics with quadrupole moment},
+  author={Quevedo, H.},
+  journal={General Relativity and Gravitation},
+  volume={43},
+  number={4},
+  pages={1141--1152},
+  year={2011},
+  publisher={Springer}
+}
+
+
+
+
+%%%%%%%
+
+@article{ruderman1972,
+  title={Pulsars: structure and dynamics},
+  author={Ruderman, M.},
+  journal={Annual Review of Astronomy and Astrophysics, vol. 10, p. 427},
+  volume={10},
+  pages={427},
+  year={1972}
+}
+
+@article{bowers1974anisotropic,
+  title={Anisotropic spheres in general relativity},
+  author={Bowers, R. L. and Liang, E. P. T.},
+  journal={Astrophysical Journal, Vol. 188, p. 657 (1974)},
+  volume={188},
+  pages={657},
+  year={1974}
+}
+
+@article{sokolov1980phase,
+  title={Phase transitions in a superfluid neutron liquid},
+  author={Sokolov, A. I.},
+  journal={Sov. Phys. JETP},
+  volume={52},
+  number={4},
+  pages={575},
+  year={1980}
+}
+
+@article{herrera1989modeling,
+  title={Modeling ``hydrodynamic phase transitions'' in a radiating spherically symmetric distribution of matter},
+  author={Herrera, L. and Núñez, L.},
+  journal={Astrophysical Journal},
+  volume={339},
+  pages={339--353},
+  year={1989}
+}
+
+@article{sawyer1973pion,
+  title={Pion condensation in superdense nuclear matter},
+  author={Sawyer, R. F. and Scalapino, D. J.},
+  journal={Physical Review D},
+  volume={7},
+  number={4},
+  pages={953},
+  year={1973},
+  publisher={APS}
+}
+
+%example 1
+@article{maharaj1989anisotropic,
+  title={Anisotropic spheres with uniform energy density in general relativity},
+  author={Maharaj, S. D. and Maartens, R.},
+  journal={General relativity and gravitation},
+  volume={21},
+  pages={899--905},
+  year={1989},
+  publisher={Springer}
+}
+
+%example 2
+@article{heintzmann1975neutron,
+  title={Neutron stars with an anisotropic equation of state-mass, redshift and stability},
+  author={Heintzmann, H. and Hillebrandt, W.},
+  journal={Astronomy and Astrophysics},
+  volume={38},
+  pages={51--55},
+  year={1975}
+}
+
+%example 3
+@article{bhar2019anisotropic,
+  title={Anisotropic compact star model: a brief study via embedding},
+  author={Bhar, P.},
+  journal={The European Physical Journal C},
+  volume={79},
+  pages={1--13},
+  year={2019},
+  publisher={Springer}
+}
+
+%example 4
+@article{chaisi2005compact,
+  title={Compact anisotropic spheres with prescribed energy density},
+  author={Chaisi, M. and Maharaj, S. D.},
+  journal={General relativity and gravitation},
+  volume={37},
+  pages={1177--1189},
+  year={2005},
+  publisher={Springer}
+}
+
+% neutron stars article (with anisotropy)
+@article{solanki2021,
+author = {Solanki, J. and Thakore, B.},
+title = {A new class of analytical solutions describing anisotropic neutron stars in general relativity},
+journal = {International Journal of Modern Physics D},
+volume = {30},
+number = {12},
+pages = {2150091},
+year = {2021},
+doi = {10.1142/S0218271821500917}
+}
+
+%solución interesante
+@article{letelier1980anisotropic,
+  title={Anisotropic fluids with two-perfect-fluid components},
+  author={Letelier, P. S.},
+  journal={Physical Review D},
+  volume={22},
+  number={4},
+  pages={807},
+  year={1980},
+  publisher={APS}
+}
+
+@article{singh2020anisotropic,
+  title={Anisotropic stars with a modified polytropic equation of state},
+  author={Singh, K. N. and Maurya, S. K. and Bhar, P. and Rahaman, F.},
+  journal={Physica Scripta},
+  volume={95},
+  number={11},
+  year={2020},
+  publisher={IOP Publishing}
+}
+
+@article{quevedo2007,
+    author = {Quevedo, H.},
+    title = {Geometrothermodynamics},
+    journal = {Journal of Mathematical Physics},
+    volume = {48},
+    number = {1},
+    pages = {013506},
+    year = {2007},
+    doi = {10.1063/1.2409524},
+    url = {https://doi.org/10.1063/1.2409524}
+}
+
+@article{tolman1939,
+  title = {Static Solutions of Einstein's Field Equations for Spheres of Fluid},
+  author = {Tolman, R. C.},
+  journal = {Phys. Rev.},
+  volume = {55},
+  issue = {4},
+  pages = {364--373},
+  numpages = {0},
+  year = {1939},
+  publisher = {American Physical Society},
+  doi = {10.1103/PhysRev.55.364},
+  url = {https://link.aps.org/doi/10.1103/PhysRev.55.364}
+}
+
+
+@article{morris1988wormholes,
+  title={Wormholes in spacetime and their use for interstellar travel: A tool for teaching general relativity},
+  author={Morris, M. S. and Thorne, K.},
+  journal={American Journal of Physics},
+  volume={56},
+  number={5},
+  pages={395--412},
+  year={1988},
+  publisher={American Association of Physics Teachers}
+}
+
+@article{kolassis1988energy,
+  title={Energy conditions for an imperfect fluid},
+  author={Kolassis, C. A. and Santos, N. and Tsoubelis, D.},
+  journal={Classical and Quantum Gravity},
+  volume={5},
+  number={10},
+  pages={1329},
+  year={1988},
+  publisher={IOP Publishing}
+}
+
+@inbook{hawking2023large,
+  title={The Large Scale Structure of Space-Time},
+  author={Hawking, S. W. and Ellis, G. F. R.},
+  series={Cambridge Monographs on Mathematical Physics},
+  year={1973},
+  publisher={Cambridge University Press},
+  chapter = {4. The physical significance of curvature},
+  pages = {88-96},
+}
+
+@article{gutierrez2015conformast,
+  title={Conformastationary disk-haloes in Einstein--Maxwell gravity},
+  author={Guti{\'e}rrez-Pi{\~n}eres, Antonio C},
+  journal={General Relativity and Gravitation},
+  volume={47},
+  pages={1--17},
+  year={2015},
+  publisher={Springer}
+}
+
+@article{herrera2014dissipative,
+  title={Dissipative collapse of axially symmetric, general relativistic sources: a general framework and some applications},
+  author={Herrera, L and Di Prisco, A and Ib{\'a}{\~n}ez, J and Ospino, J},
+  journal={Physical Review D},
+  volume={89},
+  number={8},
+  pages={084034},
+  year={2014},
+  publisher={APS}
+}
+
+@article{zakhary2004new,
+  title={A new algorithm for the Segre classification of the trace-free Ricci tensor},
+  author={Zakhary, E. and Carminati, J.},
+  journal={General relativity and gravitation},
+  volume={36},
+  pages={1015--1038},
+  year={2004},
+  publisher={Springer}
+}
+
+@book{weinberg1972gravitation,
+  title={Gravitation and Cosmology: Principles and Applications of the General Theory of Relativity},
+  author={Weinberg, S.},
+  isbn={9780471925675},
+  year={1972},
+  publisher={John Wiley \& Sons, Inc.}
+}
+
+@article{Hojman1986,
+	author = {Hojman, S. and Nuñez, L. and Patiño, A. and Rago, H.},
+	title = "{Symmetries and conserved quantities in geodesic motion}",
+	journal = {Journal of Mathematical Physics},
+	volume = {27},
+	number = {1},
+	pages = {281-286},
+	year = {1986},
+	doi = {10.1063/1.527375},
+	url = {https://doi.org/10.1063/1.527375},
+	eprint = {https://pubs.aip.org/aip/jmp/article-pdf/27/1/281/19177879/281\_1\_online.pdf},
+}
+
+@article{singh1975,
+  title={Ricci and Maxwell collineations in a null electromagnetic field},
+  author={Singh, KP and Sharma, DN},
+  journal={Journal of Physics A: Mathematical and General},
+  volume={8},
+  number={12},
+  pages={1875},
+  year={1975},
+  publisher={IOP Publishing}
+}
+
+@article{green1977,
+  title={The Robertson-Walker metric and the symmetries belong to the family of contracted Ricci collineations},
+  author={Green, L. H. and Norris, L. K. and Oliver, D. R. and Davis, W. R.},
+  journal={General Relativity and Gravitation},
+  volume={8},
+  pages={731--736},
+  year={1977},
+  publisher={Springer}
+}
+
+@article{collinson1970,
+  title={Conservation laws in general relativity based upon the existence of preferred collineations},
+  author={Collinson, C. D.},
+  journal={General Relativity and Gravitation},
+  volume={1},
+  pages={137--142},
+  year={1970},
+  publisher={Springer}
+}
+
+@inproceedings{katzin1972,
+  title={Applications of Lie derivatives to symmetries, geodesic mappings, and first integrals in Riemannian spaces},
+  author={Katzin, G. H. and Levine, J.},
+  booktitle={Colloquium Mathematicum},
+  volume={1},
+  number={26},
+  pages={21--38},
+  year={1972}
+}
+
+@article{katzin1969,
+	author = {Katzin, G. H. and Levine, J. and Davis, W. R.},
+	title = "{Curvature Collineations: A Fundamental Symmetry Property of the Space-Times of General Relativity Defined by the Vanishing Lie Derivative of the Riemann Curvature Tensor}",
+	journal = {Journal of Mathematical Physics},
+	volume = {10},
+	number = {4},
+	pages = {617-629},
+	year = {1969},
+	issn = {0022-2488},
+	doi = {10.1063/1.1664886},
+	url = {https://doi.org/10.1063/1.1664886},
+	eprint = {https://pubs.aip.org/aip/jmp/article-pdf/10/4/617/19100836/617\_1\_online.pdf},
+}
+
+@article{carot1997ricci,
+  title={Ricci collineations for type B warped space-times},
+  author={Carot, J. and N{\'u}nez, L. A. and Percoco, U.},
+  journal={General Relativity and Gravitation},
+  volume={29},
+  number={10},
+  pages={1223--1237},
+  year={1997},
+  publisher={Springer}
+}
+
+@article{oliver1977,
+  title={On certain timelike symmetry properties and the evolution of matter field space-times that admit them},
+  author={Oliver, D. R. and Davis, W. R.},
+  journal={General Relativity and Gravitation},
+  volume={8},
+  pages={905-914},
+  year={1977},
+  publisher={Springer}
+}
+
+@article{Ric-Camci2001,
+	author = {Camci, U. and Baysal, H. and Tarhan, I. and Yilmaz, I. and Yavuz, I.},
+	title = {{Ricci collineations of the Bianchi types I and III, and Kantoeski-Sachs spacetimes}},
+	journal = {International Journal of Modern Physics D},
+	volume = {10},
+	number = {05},
+	pages = {751-765},
+	year = {2001},
+	doi = {10.1142/S0218271801001219}
+}
+
+@article{Ric-singh1975,
+  title    = "Ricci and Maxwell collineations in a null electromagnetic field",
+  author   = "Singh, K. P. and Sharma, D. N.",
+  journal  = "Journal of Physics A: Mathematical and General",
+  volume   =  8,
+  number   =  12,
+  pages    = "1875",
+  year     =  1975
+}
+
+@article{Ric-yavuz1996,
+  title    = "{Ricci collineations of the Bianchi type II, VIII, and IX space-times}",
+  author   = "Yavuz, I. and Camci, U.",
+  journal  = "General Relativity and Gravitation",
+  volume   =  28,
+  number   =  6,
+  pages    = "691--700",
+  year     =  1996,
+}
+
+@article{Ric-green1977,
+  title    = "The {Robertson-Walker} metric and the symmetries belong to the
+              family of contracted Ricci collineations",
+  journal  = "General Relativity and Gravitation",
+  volume   =  8,
+  number   =  9,
+  pages    = "731--736",
+  year     =  1977
+}
+
+@book{plebanski2006introduction,
+  title={An Introduction to General Relativity and Cosmology},
+  author={Plebanski, J. and Krasiński, A.},
+  isbn={9781139458405},
+  url={https://books.google.com.co/books?id=uG9sDiUZJ94C},
+  year={2006},
+  publisher={Cambridge University Press}
+}
+
+@inbook{gourgoulhon2012numer,
+  title={3+1 Formalism in General Relativity: Bases of Numerical Relativity},
+  author={Gourgoulhon, {\'E}.},
+  chapter = {3. Geometry of Hypersurfaces},
+  pages = {29-54},
+  isbn={9783642245251},
+  lccn={2011942212},
+  series={Lecture Notes in Physics},
+  url={https://books.google.com.co/books?id=HKcMBwAAQBAJ},
+  year={2012},
+  publisher={Springer Berlin Heidelberg}
+}
+
+@book{chandrasekhar1998mathematical,
+  title={The Mathematical Theory of Black Holes},
+  author={Chandrasekhar, S.},
+  isbn={9780198503705},
+  lccn={93181092},
+  series={International series of monographs on physics},
+  url={https://books.google.com.co/books?id=LBOVcrzFfhsC},
+  year={1998},
+  publisher={Clarendon Press}
+}
+
+@article{schwarzschild1916gravitationsfed,
+  title={{\"U}ber das gravitationsfeld eines massenpunktes nach der einsteinschen theorie},
+  author={Schwarzschild, K.},
+  journal={Sitzungsberichte der k{\"o}niglich preussischen Akademie der Wissenschaften},
+  pages={189--196},
+  year={1916}
+}
+
+@article{kerr1963gravitational,
+  title={Gravitational field of a spinning mass as an example of algebraically special metrics},
+  author={Kerr, R. P.},
+  journal={Physical review letters},
+  volume={11},
+  number={5},
+  pages={237},
+  year={1963},
+  publisher={APS}
+}
+
+@book{wald2010general,
+  title={General Relativity},
+  author={Wald, R. M.},
+  isbn={9780226870373},
+  url={https://books.google.com.co/books?id=9S-hzg6-moYC},
+  year={2010},
+  publisher={University of Chicago Press}
+}
+
+@book{StephaniKramer2003, 
+place={Cambridge}, 
+edition={2}, 
+series={Cambridge Monographs on Mathematical Physics}, 
+title={Exact Solutions of Einstein’s Field Equations}, publisher={Cambridge University Press},
+author={Stephani, H. and Kramer, D. and MacCallum, M. and Hoenselaers, C. and Herlt, E.}, 
+year={2003}, 
+collection={Cambridge Monographs on Mathematical Physics}}
+
+@book{synge1960relativity,
+  added-at = {2012-03-11T15:53:25.000+0100},
+  address = {Amsterdam; New York},
+  author = {Synge, J. L.},
+  biburl = {http://www.bibsonomy.org/bibtex/2b5ecd0130b50eca6c021301f7ca8125f/dbader},
+  description = {Relativity: the general theory. (Buch, 1960) [WorldCat.org]},
+  interhash = {a48e9d4f4a280cce47a87de709de5564},
+  intrahash = {b5ecd0130b50eca6c021301f7ca8125f},
+  keywords = {general gravitation},
+  publisher = {North-Holland Pub. Co.; Interscience Publishers},
+  refid = {670547},
+  timestamp = {2012-03-11T15:53:25.000+0100},
+  title = {Relativity: the general theory},
+  url = {http://www.worldcat.org/title/relativity-the-general-theory/oclc/670547&referer=brief_results},
+  year = 1960
+}
+@book{poisson2004relativist,
+  title={A relativist's toolkit: the mathematics of black-hole mechanics},
+  author={Poisson, E.},
+  year={2004},
+  publisher={Cambridge university press}
+}
+
+@book{Chandrasekhar2002mathematical,
+	  title         = {The mathematical theory of black holes},
+	  author     = {Chandrasekhar, S.},
+	  year          = {2002},
+	  publisher     = {Oxford Univ. Press},
+	  address       = {Oxford},
+	  series        = {Oxford classic texts in the physical sciences},
+	  url           = {https://cds.cern.ch/record/579245}
+}
+
+@article{gutierrez2019c3,
+  title={{$C^3$} matching for asymptotically flat spacetimes},
+  author={Guti{\'e}rrez-Pi{\~n}eres, A. C. and Quevedo, H.},
+  journal={Classical and Quantum Gravity},
+  volume={36},
+  number={13},
+  pages={135003},
+  year={2019},
+  publisher={IOP Publishing}
+}
+
+@article{gutierrez2022darmois,
+  title={Darmois matching and {$C^3$} matching},
+  author={Guti{\'e}rrez-Pi{\~n}eres, A. C. and Quevedo, H.},
+  journal={Classical and Quantum Gravity},
+  volume={39},
+  number={3},
+  pages={035015},
+  year={2022},
+  publisher={IOP Publishing}
+}
+
+@book{misner2017gravitation,
+  title={Gravitation},
+  author={Misner, C. W. and Thorne, K. S. and Wheeler, J. A.},
+  year={2017},
+  publisher={Princeton University Press}
+}
+
+@article{Racz1992,
+doi = {10.1088/0264-9381/9/8/004},
+url = {https://dx.doi.org/10.1088/0264-9381/9/8/004},
+year = {1992},
+publisher = {},
+volume = {9},
+number = {8},
+pages = {L93},
+author = {Racz, I. },
+title = {Note on stationary-axisymmetric vacuum spacetimes with inside ellipsoidal symmetry},
+journal = {Classical and Quantum Gravity}
+}
+
+@article{Krasinski1978,
+title = {Ellipsoidal space-times, sources for the Kerr metric},
+journal = {Annals of Physics},
+volume = {112},
+number = {1},
+pages = {22-40},
+year = {1978},
+issn = {0003-4916},
+doi = {https://doi.org/10.1016/0003-4916(78)90079-9},
+url = {https://www.sciencedirect.com/science/article/pii/0003491678900799},
+author = {Krasiński, A.}
+}
+
+@article{brahma2023space,
+  title={The space--time line element for static ellipsoidal objects},
+  author={Brahma, R. and Sen, A. K.},
+  journal={General Relativity and Gravitation},
+  volume={55},
+  number={2},
+  pages={24},
+  year={2023},
+  publisher={Springer}
+}
+
+@article{Zsigrai2003,
+doi = {10.1088/0264-9381/20/13/330},
+url = {https://dx.doi.org/10.1088/0264-9381/20/13/330},
+year = {2003},
+publisher = {},
+volume = {20},
+number = {13},
+pages = {2855},
+author = {Zsigrai, J.},
+title = {Ellipsoidal shapes in general relativity: general definitions and an application},
+journal = {Classical and Quantum Gravity}
+}
+
+@article{racz1998uniqueness,
+  title={On the uniqueness of stationary axisymmetric ellipsoidal vacuum configurations},
+  author={R{\'a}cz, I. and S{\"u}veges, M.},
+  journal={Modern Physics Letters A},
+  volume={13},
+  number={14},
+  pages={1101--1107},
+  year={1998},
+  publisher={World Scientific}
+}
+
+@article{Stewart-Ellis1968,
+    author = {Stewart, J. M. and Ellis, G. F. R.},
+    title = {Solutions of Einstein's Equations for a Fluid Which Exhibit Local Rotational Symmetry},
+    journal = {Journal of Mathematical Physics},
+    volume = {9},
+    number = {7},
+    pages = {1072-1082},
+    year = {1968}
+}
+
+@article{ferwagner1992solutions,
+  title={Solutions of Einstein’s field equations for a rigidly rotating perfect fluid},
+  author={Ferwagner, R.},
+  journal={Relativity Today},
+  pages={133},
+  year={1992},
+  publisher={Nova Science Publishers}
+}
+
+
+@article{lukacs1983nut,
+  title={A NUT-like solution with fluid matter},
+  author={Luk{\'a}cs, B. and Newman, E. T. and Sparling, G. and Winicour, J.},
+  journal={General Relativity and Gravitation},
+  volume={15},
+  pages={567--579},
+  year={1983},
+  publisher={Springer}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%% OVOIDS
+
+%Versión ampliada del tratado de Teixeira. Construcción del óvalo como la envolvente de unas circunferencias. Inciso 248 N° 4.
+@inbook{teixeira1971traité,
+  title={Trait{\'e} des courbes sp{\'e}ciales remarquables planes et gauches},
+  author={Teixeira, F. G.},
+  volume={I},
+  year={1971},
+  publisher={{Chelsea Publishing Company}},
+  chapter={Les ovales de Descartes},
+  pages={218-233}
+}
+
+%Tratado original de Teixeira sobre los óvalos
+@book{teixeira1905tratado,
+  title={Tratado de las curvas especiales notables},
+  author={Teixeira, F. G.},
+  series={Memorias de la Real Academia de ciencias exactas, fisicas y naturales de Madrid},
+  year={1905},
+  publisher={Imprenta de la "Gaceta de Madrid"}
+}
+
+
+%Huygen tratado de la luz
+@inbook{huygens1920traité,
+  title={Traité de la lumière},
+  author={Huygens, C.},
+  year={1920},
+  publisher={Gauthier-Villars et Cie éditeurs},
+  chapter={VI, Des figures des corps diaphanes qui servent a la réfraction et a la réflexion},
+  pages={126-153},
+  series={Les maitres de la pensée scientifique}
+}
+
+% ovals and the elliptic functions
+@article{bacon1913,
+ author = {Bacon, C. L.},
+ journal = {American Journal of Mathematics},
+ number = {3},
+ pages = {261--280},
+ publisher = {Johns Hopkins University Press},
+ title = {The Cartesian Oval and the Elliptic Functions $p$ and $\sigma$},
+ volume = {35},
+ year = {1913}
+}
+
+@misc{mathcurve,
+ author = {Ferréol, R.},
+ title = {{Cartesian Oval}},
+ note = {\url{https://mathcurve.com/courbes2d.gb/descartes/descartes.shtml} (accessed: 01.08.2025)},
+}
+
+@phdthesis{soland1997,
+  title        = {Courbes cartésiennes},
+  author       = {Soland, C.},
+  year         = 1997,
+  note         = {Available at \url{https://mathcurve.com/these\%20soland\%20ovales.PDF}},
+  school       = {Université de Lausanne, Faculté des sciences},
+  type         = {PhD thesis}
+}
+
+@inbook{zwikker2011advanced,
+  title={The Advanced Geometry of Plane Curves and Their Applications},
+  author={Zwikker, C.},
+  chapter={{Chapter VIII Hyperbola, 5 Cartesian ovals}},
+  series={Dover Books on Mathematics},
+  url={https://books.google.com.co/books?id=25tMEYTik-AC},
+  year={2011},
+  publisher={Dover Publications},
+  pages={123-125}
+}
+
+@inbook{descartes1637,
+  title = {La Géométrie},
+  author = {Descartes, R.},
+  numer={ed. 1637},
+  publisher = {},
+  year = {1637},
+  chapter = {Explication de quatre nouveaux genres d’ovales qui servent à l’optique},
+  pages={352-357}
+}
+
+@inbook{quelet1829,
+  title={Correspondance math{\'e}matique et physique},
+  author={Quetelet, A.},
+  volume={5},
+  year={1829},
+  publisher={M. Hayez, Imprimeur de L'Académie Royale},
+  chapter={Sur les lignes dirimantes \`a deux foyers conjugués},
+  pages={109-116}
+}
+
+@inbook{newton1846principia,
+  title={The Mathematical Principles of Natural Philosophy},
+  chapter = {Of the motion of very small bodies when agitated by centripetal forces tending to the several parts of any very great body},
+  author={Newton, I.},
+  year={1846},
+  publisher={Daniel Adee},
+  pages = {247-248},
+  note = {Translation to English by Andrew Motte. \url{https://en.wikisource.org/wiki/Page%3ANewton's_Principia_(1846).djvu/253}},
+}
+@article{johnson1875bipolar,
+  title={Bipolar Equations-Cartesian Ovals},
+  author={Woolsey, J. M.},
+  journal={The Analyst},
+  pages={106--115},
+  year={1875},
+  publisher={Annals of Mathematics}
+}
+@article{southall1922aplanatic,
+  title={Aplanatic (or Cartesian) optical surfaces},
+  author={Southall, J. P. C. },
+  journal={Journal of the Franklin Institute},
+  volume={193},
+  number={5},
+  pages={609--626},
+  year={1922},
+  publisher={Elsevier}
+}
+@article{roberts1869ovals,
+  title={On the Ovals of Descartes.},
+  author={Roberts, S.},
+  journal={Proceedings of the London Mathematical Society},
+  volume={1},
+  number={1},
+  pages={106--126},
+  year={1869},
+  publisher={Wiley Online Library}
+}
+
+@article{blazek2021chasles,
+  title={On a Chasles construction of Cartesian ovals},
+  author={Blazek, J. and Region, S. B.},
+  year={2021},
+  journal = {Electronic Proceedings of the 26th Asian Technology Conference in Mathematics}
+}
+@article{valencia2017aspheric,
+  title={Aspheric coefficients of deformation for a Cartesian oval surface},
+  author={Valencia-Estrada, J. and Vaca Pereira-Ghirghi, M. and Malacara-Hern{\'a}ndez, Z. and Chaparro-Romo, H. A.},
+  journal={Journal of Optics},
+  volume={46},
+  pages={100--107},
+  year={2017},
+  publisher={Springer}
+}
+@article{farouki2022cartesian,
+  title={The Cartesian ovals},
+  author={Farouki, R. T.},
+  journal={The Mathematical Intelligencer},
+  volume={44},
+  number={4},
+  pages={343--353},
+  year={2022},
+  publisher={Springer}
+}
+
+% Review Ovalos de Descartes y Tercer foco
+@inbook{williamson1873elementary,
+  title={An Elementary Treatise on the Differential Calculus: Containing the Theory of Plane Curves, with Numerous Examples},
+  chapter={XX On the Cartesian Oval},
+  author={Williamson, B.},
+  url={https://books.google.com.co/books?id=VlADAAAAQAAJ},
+  year={1912},
+  pages ={375-384},
+  publisher={Longmans, Green}
+}
+
+% Tercer foco
+@inbook{chasles1837apercu,
+  title={Aper{\c{c}}u historique sur l'origine et le d{\'e}veloppement des m{\'e}thodes en g{\'e}om{\'e}trie: particuli{\`e}rement de celles qui se rapportent {\`a} la g{\'e}ometrie moderne, suivi d'un m{\'e}moire de g{\'e}om{\'e}trie sur deux principes g{\'e}n{\'e}reaux de la science, la dualit{\'e} et l'homographie},
+  author={Chasles, M.},
+  chapter={Note XXI: Sur les ovales de Descartes, ou lignes aplanétiques.},
+  series={M{\'e}m. couronn{\'e}s, Acad. des sci. et belles lett. de Bruxelles},
+  year={1837},
+  pages={350-353},
+  publisher={M. Hayez}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Nuclear Physics
+@article{albertini2018two,
+  title={Two questions about a non-flat nuclear space-time},
+  author={Albertini, G. and Bassani, D. and Cardone, F.},
+  journal={The European Physical Journal Plus},
+  volume={133},
+  number={2},
+  year={2018},
+  publisher={Springer}
+}
+
+@article{cao2020landscape,
+  title={Landscape of pear-shaped even-even nuclei},
+  author={Cao, Y. and Agbemava, S. E. and Afanasjev, A. V. and Nazarewicz, W. and Olsen, E.},
+  journal={Physical Review C},
+  volume={102},
+  number={2},
+  year={2020},
+  publisher={APS}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%% OPTICS
+
+@article{salazar2017trajectories,
+  title={Trajectories on the Poincar{\'e} sphere of polarization states of a beam passing through a rotating linear retarder},
+  author={Salazar-Ariza, K. and Torres, R.},
+  journal={Journal of the Optical Society of America A},
+  volume={35},
+  number={1},
+  pages={65--72},
+  year={2017},
+  publisher={Optical Society of America}
+}
+
+%Fermat principle
+@inbook{goodman2010,
+  title={Handbook of Optics: Volume I - Geometrical and Physical Optics, Polarized Light, Components and Instruments},
+  chapter={1. General Principles of Geometric Optics},
+  author={Goodman, D.},
+  url={https://books.google.com.co/books?id=VlADAAAAQAAJ},
+  year={210},
+  edition={3rd ed.},
+  publisher={McGraw-Hill Professional},
+  isbn={9780071498890},
+  editor={Bass, Michael}
+  }
+
+
+%Fermat principle
+@book{pedrotti2017introduction,
+  title={Introduction to Optics},
+  author={Pedrotti, F. L. and Pedrotti, L. M. and Pedrotti, L. S.},
+  isbn={9781108563321},
+  url={https://books.google.com.co/books?id=VU9TDwAAQBAJ},
+  year={2017},
+  publisher={Cambridge University Press}
+}
+
+
+%Fermat principle
+@book{sharma2006optics,
+  title={Optics: Principles and Applications},
+  author={Sharma, K. K.},
+  isbn={9780080463919},
+  url={https://books.google.com.co/books?id=d8QU7tbzLKwC},
+  year={2006},
+  publisher={Elsevier Science}
+}
+
+% Schwarzschild equation
+@article{schwarzschild1905untersuchungen,
+	author = {Schwarzschild, K.},
+	title = {{Untersuchungen zur geometrischen Optik I,}},
+	journal = {{Astronomische Mitteilungen der Universitaets-Sternwarte zu Goettingen}},
+	year = 1905,
+	volume = {9},
+	pages = {1},
+	adsurl = {https://ui.adsabs.harvard.edu/abs/1905MiGoe...9....1S},
+	adsnote = {Provided by the SAO/NASA Astrophysics Data System}
+}
+
+% Extremal de una funcional
+@book{arnold1989,
+   title =     {Mathematical Methods Of Classical Mechanics},
+   author =    {Arnold, V. I. and Weinstein, A. and Vogtmann, K.},
+   publisher = {Springer},
+   isbn =      {9780387968902},
+   year =      {1989},
+   series =    {Graduate Texts in Mathematics},
+   edition =   {2nd}
+}
+
+@article{villarino2007decartes,
+  title={Decartes' Perfect Lens},
+  author={Villarino, M. B.},
+  journal={arXiv preprint arXiv:0704.1059},
+  year={2007}
+}
+
+% Propone las supercónicas como superficies para la creación de lentes	
+@inproceedings{Greynolds2002,
+author = {Greynolds, A. W.},
+booktitle = {International Optical Design Conference},
+journal = {International Optical Design Conference},
+keywords = {Lens system design; Aspherics; Curvature; Diffraction; Interpolation; Optical design; Optical surfaces; Surfaces},
+pages = {IMA1},
+publisher = {Optica Publishing Group},
+title = {Superconic and subconic surface descriptions in optical design},
+year = {2002},
+url = {https://opg.optica.org/abstract.cfm?URI=IODC-2002-IMA1},
+doi = {10.1364/IODC.2002.IMA1}
+}
+
+% Generalización de las superficies cónicas a supercónicas, siguiendo los trabajos de Greynolds
+@article{Cho2016,
+author = {Cho, S.},
+journal = {J. Opt. Soc. Am. A},
+keywords = {Optical design and fabrication; Aspherics; Nonspherical lens design ; Curvature; Interpolation; Optical design; Refraction; Silicon; Surfaces},
+number = {9},
+pages = {1822--1830},
+publisher = {Optica Publishing Group},
+title = {Explicit superconic curves},
+volume = {33},
+year = {2016},
+url = {https://opg.optica.org/josaa/abstract.cfm?URI=josaa-33-9-1822},
+doi = {10.1364/JOSAA.33.001822}
+}
+
+% Primer artículo sobre los ovoides
+@article{silva-Lora2020explicit,
+author = {Silva-Lora, A. and Torres, R.},
+title = {Explicit Cartesian oval as a superconic surface for stigmatic imaging optical systems with real or virtual source or image},
+journal = {Proceedings of the Royal Society A: Mathematical, Physical and Engineering Sciences},
+volume = {476},
+number = {2235},
+pages = {20190894},
+year = {2020},
+doi = {10.1098/rspa.2019.0894}
+}
+
+% Segundo artículo sobre los ovoides
+@article{silva-Lora2020superconical,
+author = {Silva-Lora, A. and Torres, R.},
+journal = {J. Opt. Soc. Am. A},
+number = {7},
+pages = {1155--1165},
+publisher = {Optica Publishing Group},
+title = {Superconical aplanatic ovoid singlet lenses},
+volume = {37},
+year = {2020},
+doi = {10.1364/JOSAA.392795}
+}
+
+% Primero sobre aplanetismo (casos particulares con pocos lentes)
+@article{silva-Lora2020aplanatism, 
+  title={Aplanatism in stigmatic optical systems},
+  author={Silva-Lora, A. and Torres, R.},
+  journal={Optics Letters},
+  volume={45},
+  number={23},
+  pages={6390--6393},
+  year={2020},
+  publisher={Optica Publishing Group}
+}
+
+% Segundo sobre aplanatismo (caso general con N lentes)
+@article{silva-Lora2021,  
+author = {Silva-Lora, A. and Torres, R.},
+journal = {J. Opt. Soc. Am. A},
+number = {8},
+pages = {1160--1169},
+publisher = {Optica Publishing Group},
+title = {Rigorously aplanatic Descartes ovoids},
+volume = {38},
+year = {2021},
+url = {https://opg.optica.org/josaa/abstract.cfm?URI=josaa-38-8-1160},
+doi = {10.1364/JOSAA.422809}
+}
+
+% Acromatismo
+@article{silva-Lora2022, 
+author = {Silva-Lora, A. and Torres, R.},
+journal = {J. Opt. Soc. Am. A},
+keywords = {Chromatic aberration; Image metrics; Imaging systems; Optical imaging; Optical systems; Spherical aberration},
+number = {9},
+pages = {1524--1532},
+publisher = {Optica Publishing Group},
+title = {Achromatic stigmatism: achromatic Cartesian ovoid},
+volume = {39},
+year = {2022},
+url = {https://opg.optica.org/josaa/abstract.cfm?URI=josaa-39-9-1524},
+doi = {10.1364/JOSAA.460993}
+}
+
+% Coeficientes asfericos
+@article{silva-Lora2023,  
+author = {Silva-Lora, A. and Torres, R.},
+journal = {J. Opt. Soc. Am. A},
+keywords = {Imaging systems; Optical imaging; Optical properties; Optical systems; Spherical aberration; Systems design},
+number = {4},
+pages = {C30--C36},
+publisher = {Optica Publishing Group},
+title = {Stigmatic aspherical refracting surfaces from Cartesian ovoids},
+volume = {40},
+year = {2023},
+url = {https://opg.optica.org/josaa/abstract.cfm?URI=josaa-40-4-C30},
+doi = {10.1364/JOSAA.482669}
+}
+
+
+%%%%%%%%%%%%%% Curvilinear Coordinates
+@inbook{stewart2012calculus,
+  title={Calculus: Early Transcendentals 7th. ed.},
+  chapter = {14. Partial derivatives},
+  pages = {933-946},	
+  author={Stewart, J.},
+  isbn={9786074818987},
+  year={2012},
+  publisher={Cengage Learning Editores}
+}
+
+@book{zill2011Advanced,
+  title={Advanced Engineering Mathematics 4th. ed.},
+  author={Zill, G. D. and Wright, W. S. and Cullen, M. R.},
+  isbn={9780763779948},
+  year={2011},
+  publisher={Jones and Barlett Learning,}
+}
+
+@book{moon1988field,
+  title={Field Theory Handbook: Including Coordinate Systems, Differential Equations, and Their Solutions},
+  author={Moon, P. H. and Spencer, D. E.},
+  isbn={9783540027324},
+  lccn={87037644},
+  url={https://books.google.com.co/books?id=EDnvAAAAMAAJ},
+  year={1988},
+  publisher={John T. Zubal}
+}
+
+@book{lockwood2007book,
+  title={Book of Curves},
+  author={Lockwood, E. H.},
+  isbn={9780521044448},
+  series={A Book of Curves},
+  url={https://books.google.com.co/books?id=PSdWuoORYhEC},
+  year={2007},
+  publisher={Cambridge University Press}
+}
+
+@inbook{lockwood2007InBook,
+  author    = "Lockwood, E. H.",
+  chapter     = "Bipolar Coordinates",
+  title = "Book of Curves",
+  year      = "2007",
+  publisher = "Cambridge University Press",
+  pages     = "187--190"
+}
+
+@book{lame1859leccons,
+  title={Le{\c{c}}ons sur les coordonn{\'e}es curvilignes et leurs diverses applications},
+  author={Lam{\'e}, G.},
+  year={1859},
+  publisher={Mallet-Bachelier},
+}
+
+@article{darboux1899classe,
+  title={Sur une classe remarquable de courbes et de surfaces alg{\'e}briques, 2e {\'e}dit},
+  author={Darboux, G.},
+  journal={Hermann, Paris},
+  year={1899}
+}
+
+@article{eisenhart1934separable,
+  title={Separable systems of Stackel},
+  author={Eisenhart, L. P.},
+  journal={Annals of Mathematics},
+  pages={284--305},
+  number = {2},
+  volume = {35},
+  year={1934},
+}
+
+@article{eisenhart1935stackel,
+  title={St{\"a}ckel systems in conformal {Euclidean} space},
+  author={Eisenhart, L. P.},
+  journal={Annals of Mathematics},
+  volume={36},
+  number={1},
+  pages={57--70},
+  year={1935},
+}
+
+@book{bocher1894reihenentwicklungen,
+  title={{\"U}ber die Reihenentwicklungen der Potentialtheorie},
+  author={B{\^o}cher, M.},
+  year={1894},
+  publisher={Teubner},
+}
+
+@inbook{bocher1894inbook,
+  title={{\"U}ber die Reihenentwicklungen der Potentialtheorie},
+  author={B{\^o}cher, M.},
+  chapter = {{Kapitel 4. Beschreibung der Gestalt der verschiedenen confocalen Cyclidenschaaren}},
+  year={1894},
+  publisher={Teubner},
+  pages = {71-86},
+}
+
+@book{klein1894lineare,
+title={{{\"U}ber lineare Differentialgleichungen der zweiten Ordnung: Vorlesung, gehalten im Sommersemester}},
+author={Klein, F.},
+year={1894},
+}
