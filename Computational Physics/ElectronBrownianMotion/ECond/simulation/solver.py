@@ -13,7 +13,7 @@ def BF(X,Y,t):
     return X*0 #In order: [Bz]
 
 class ECond:
-    def __init__(self,h=0.05,N=100,Np=1,EField=EF,BField=BF,gamma=0.1,verbose=False):
+    def __init__(self,h=0.05,N=100,Np=1,EField=EF,BField=BF,gamma=0.1,R=0.3,verbose=False):
         """
             @params
                 EField: func. It is a function of X,Y,t and it returns a list of the form [Ex, Ey]
@@ -32,6 +32,7 @@ class ECond:
         self.EField = EField
         self.BField = BField
         self.gamma = gamma
+        self.R = R
 
     def get_self(self):
         return self
@@ -51,9 +52,12 @@ class ECond:
         E = self.EField(X,Y,self.h*self.i)
         B = self.BField(X,Y,self.h*self.i)
 
+        # Random force
+        R = self.R*(np.random.random(2)-0.5)
+
         #Final accelerations
-        Ax += self.Q*(E[0] + Vy*B) - self.gamma*Vx
-        Ay += self.Q*(E[1] - Vx*B) - self.gamma*Vy
+        Ax += self.Q*(E[0] + Vy*B) - self.gamma*Vx + R[0]
+        Ay += self.Q*(E[1] - Vx*B) - self.gamma*Vy + R[1]
 
         return np.array([Vx, Vy, Ax, Ay])
 

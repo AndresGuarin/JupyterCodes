@@ -5,9 +5,21 @@ import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.animation as animation
 
+def get_conners(box):
+      a,b,c,d = box
+      X = [a,b,b,a,a]
+      Y = [c,c,d,d,c]
+      return X,Y
+
+def plot_boxes(box1,box2):
+    X1, Y1 = get_conners(box1) 
+    X2, Y2 = get_conners(box2); 
+    plt.plot(X1,Y1,'-b',lw=1.7)
+    plt.plot(X2,Y2,'-b',lw=1.7)
+
 def animate_path(self,s,kind=0,save=False,name=None,verbose=True,
                  plot_params=['-r','or',0.2,5.0,0.5],length=8,interval=100,dj=1,
-                 j0=1,L=10,comet=False,ltraj=100):
+                 j0=1,L=10,comet=False,ltraj=100,box1=None,box2=None):
     """
     Animates the positions of the particles of the system.
 
@@ -65,11 +77,8 @@ def animate_path(self,s,kind=0,save=False,name=None,verbose=True,
         elif kind==1:
               for i in range(self.Np):
                     plt.plot(LX[j,i],LY[j,i],fmt1,ms=ms1,alpha=alpha1); # Trajectories
-        elif kind==2:
-              for i in range(self.Np):
-                    plt.plot(LX[j-1:j+1,i],LY[j-1:j+1,i],fmt1,lw=lw1,alpha=alpha1); # Trajectories
-        plt.xlim(-L,L)
-        plt.ylim(-L,L)
+        #plt.xlim(-L,L); plt.ylim(-L,L)
+        if box1 != None: plot_boxes(box1,box2)
         if verbose: plt.legend(loc='upper right')
     
     # Create figure and axis
