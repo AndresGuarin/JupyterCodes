@@ -53,11 +53,12 @@ class ECond:
         B = self.BField(X,Y,self.h*self.i)
 
         # Random force
-        R = self.R*(np.random.random(2)-0.5)
-
+        Rx = self.R*(np.random.random(self.Np)-0.5)
+        Ry = self.R*(np.random.random(self.Np)-0.5)
+        
         #Final accelerations
-        Ax += self.Q*(E[0] + Vy*B) - self.gamma*Vx + R[0]
-        Ay += self.Q*(E[1] - Vx*B) - self.gamma*Vy + R[1]
+        Ax += self.Q*(E[0] + Vy*B) - self.gamma*Vx + Rx
+        Ay += self.Q*(E[1] - Vx*B) - self.gamma*Vy + Ry
 
         return np.array([Vx, Vy, Ax, Ay])
 
