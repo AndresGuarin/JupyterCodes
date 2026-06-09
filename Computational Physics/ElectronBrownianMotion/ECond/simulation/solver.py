@@ -129,36 +129,49 @@ class ECond:
         return np.array([Xf, Yf, Vxf, Vyf])
 
     def get_net_force(self,s):
-        LF = np.zeros((self.N+1,self.Np))
-        for i in range(self.N+1):
-            X = s[0][i,:]
-            Y = s[1][i,:]
-            I = np.eye(self.Np)
-            A, B = np.meshgrid(X,X); dX = A-B
-            A, B = np.meshgrid(Y,Y); dY = A-B 
-            A, B = np.meshgrid(self.Q,self.Q); Q2 = A*B
-            R = np.sqrt(dX**2+dY**2) + I
-            F = Q2/R**2
-            LF[i] = np.sum(F,axis=0)
-
-        return LF
-
-    def get_Energy(self,s):
-        Ek = np.zeros(self.N+1)
-        V = np.zeros(self.N+1)
+        LF = np.zeros((self.N+1,self.Np,6))
         for i in range(self.N+1):
             X = s[0][i,:]
             Y = s[1][i,:]
             Vx = s[2][i,:]
             Vy = s[3][i,:]
-            I = np.eye(self.Np)
+            
+            # Force between the negative charges
             A, B = np.meshgrid(X,X); dX = A-B
-            A, B = np.meshgrid(Y,Y); dY = A-B 
-            A, B = self.Q**2*np.meshgrid(np.ones(self.Np),np.ones(self.Np)); Q2 = A*B
-            R = np.sqrt(dX**2+dY**2) + I
-            Vi = (Q2/R)*(np.eye(self.Np)==0)
-            Eki = 1/2*(Vx**2+Vy**2)
-            V[i] = np.sum(Vi)/2
-            Ek[i] = np.sum(Eki)
+            A, B = np.meshgrid(Y,Y); dY = A-B
+            R = np.sqrt(dX**2+dY**2) + np.eye(self.Np)
+            Fx_elec = np.sum(dX/R**3,axis=0)
+            Fy_elec = np.sum(dY/R**3,axis=0)
+            
+            Fx_fric = - self.gamma*Vx
+            Fy_fric = - self.gamma*Vy
 
-        return [Ek,V,Ek+V]
+            # Force due to an external field E and B with Ez=0, Bx=0, By=0
+            E = self.EField(X,Y,self.h*self.i)
+            Fx_ext = self.Q*(E[0])
+            Fy_ext = self.Q*(E[1])
+
+            F = [Fx_elec,Fy_elec,Fx_fric,Fy_fric,Fx_ext,Fy_ext]
+            for j in range(6):
+                LF[i,:,j] = F[j]
+        return LF
+
+    #def get_Energy(self,s):
+    #    Ek = np.zeros(self.N+1)
+    #    V = np.zeros(self.N+1)
+    #    for i in range(self.N+1):
+    #        X = s[0][i,:]
+    #        Y = s[1][i,:]
+    #        Vx = s[2][i,:]
+    #        Vy = s[3][i,:]
+    #       I = np.eye(self.Np)
+    #       A, B = np.meshgrid(X,X); dX = A-B
+    #       A, B = np.meshgrid(Y,Y); dY = A-B 
+    #       A, B = self.Q**2*np.meshgrid(np.ones(self.Np),np.ones(self.Np)); Q2 = A*B
+    #       R = np.sqrt(dX**2+dY**2) + I
+    #       Vi = (Q2/R)*(np.eye(self.Np)==0)
+    #       Eki = 1/2*(Vx**2+Vy**2)
+    #       V[i] = np.sum(Vi)/2
+    #       Ek[i] = np.sum(Eki)
+    #
+    #    return [Ek,V,Ek+V]

@@ -5,6 +5,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.animation as animation
 
+
 def get_conners(box):
       a,b,c,d = box
       X = [a,b,b,a,a]
@@ -19,7 +20,7 @@ def plot_boxes(box1,box2):
 
 def animate_path(self,s,kind=0,save=False,name=None,verbose=True,
                  plot_params=['-r','or',0.2,5.0,0.5],length=8,interval=100,dj=1,
-                 j0=1,L=None,comet=False,ltraj=100,box1=None,box2=None):
+                 j0=1,L=None,comet=False,ltraj=100,box1=None,box2=None,b_param=1):
     """
     Animates the positions of the particles of the system.
 
@@ -28,24 +29,37 @@ def animate_path(self,s,kind=0,save=False,name=None,verbose=True,
                 It contains the data of LJGas.solver.particles object.
         s : array-like. 
                 It contains the positions and velocities of the particles.
-        duration : float. 
-                Time in seconds of the simulation.
-        save : bool. 
-                If it is true the animation is saved in pc.
-        name : str. 
+        save: boolean
+                If it is true, the animation is saved as a video file
+        name : str or None. 
                 If save is true, then this is the name of the saved video.
                 It includes the extension of the video (e.g.: .mp4)
         verbose : bool. 
                 If it is true, we show the labels of time and iteration.
         plot_params : list. 
                 It contains [fmt1, fmt2, lw1, ms1, alpha1].
-        amp : 1. float. 
-                It is associated to a parameter of get_uniform function.
         length : float. 
                 It is the length of the figure.
         interval : float. 
                 Interval in miliseconds between each frame in the 
-            animation.
+                animation.
+        dj: int
+                Number of the steps of the iteration function that plots each frame
+                of the animation on screen.
+        j0: int
+                Starting point of the animation.
+        L: float or None
+                It is the limit of the x- and y-axis
+        comet: boolean
+                If it is true, only a portion of the whole path of each particle is plotted.
+                animation
+        ltraj: int
+                It controls how much of the path is plotted in each frame when comet is True.
+        box1 and box2: list or None
+                It contains the x and y coordinates associated to 2 rectangles that are
+                plotted in the animation.
+        b_param: float
+                Parameter of the x- and y-cut of the line of code that computes the "current density" J 
     """
     
     # Time list
@@ -61,6 +75,7 @@ def animate_path(self,s,kind=0,save=False,name=None,verbose=True,
     lw1 = plot_params[2]
     ms1 = plot_params[3]
     alpha1 = plot_params[4]
+    b=b_param
 
 
     #local function for update each frame
@@ -80,7 +95,8 @@ def animate_path(self,s,kind=0,save=False,name=None,verbose=True,
         if L!= None: plt.xlim(-L,L); plt.ylim(-L,L)
         if box1 != None: plot_boxes(box1,box2)
         if verbose: plt.legend(loc='upper right')
-    
+        J = -np.sum(s[3][j,:][(LY[j,:]>=-b)*(LY[j,:]<=b)*(LY[j,:]<0)]) + np.sum(s[2][j,:][LY[j,:]<b])+ np.sum(s[3][j,:][(LY[j,:]>=-b)*(LY[j,:]<=b)*(LX[j,:]>0)]) - np.sum(s[2][j,:][LY[j,:]>-b])
+        ax.quiver(0, 0, J, 0, scale_units='xy',angles='xy',scale=4,color='orange',width=0.01)
     # Create figure and axis
     fig = plt.figure(figsize=(length,length))
     ax = fig.gca()
