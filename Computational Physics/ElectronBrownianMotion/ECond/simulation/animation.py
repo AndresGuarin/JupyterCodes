@@ -19,7 +19,7 @@ def plot_boxes(box1,box2):
 
 def animate_path(self,s,kind=0,save=False,name=None,verbose=True,
                  plot_params=['-r','or',0.2,5.0,0.5],length=8,interval=100,dj=1,
-                 j0=1,L=10,comet=False,ltraj=100,box1=None,box2=None):
+                 j0=1,L=None,comet=False,ltraj=100,box1=None,box2=None):
     """
     Animates the positions of the particles of the system.
 
@@ -76,8 +76,8 @@ def animate_path(self,s,kind=0,save=False,name=None,verbose=True,
                 plt.plot(0,0,'o',ms=0, label=r'$n=$'+f'{j}\n'+r'$\overline{t}=$ '+f'{np.round(time[j],1)}') # Legends
         elif kind==1:
               for i in range(self.Np):
-                    plt.plot(LX[j,i],LY[j,i],fmt1,ms=ms1,alpha=alpha1); # Trajectories
-        #plt.xlim(-L,L); plt.ylim(-L,L)
+                    plt.plot(LX[j,i],LY[j,i],fmt1,ms=ms1,alpha=alpha1,label='partícula'); # Trajectories
+        if L!= None: plt.xlim(-L,L); plt.ylim(-L,L)
         if box1 != None: plot_boxes(box1,box2)
         if verbose: plt.legend(loc='upper right')
     
@@ -87,7 +87,9 @@ def animate_path(self,s,kind=0,save=False,name=None,verbose=True,
     
     # Animate the movement
     anim = animation.FuncAnimation(fig,update,range(j0,LX.shape[0],dj), repeat=False, interval=interval)
-    if save: anim.save(name,writer='ffmpeg')
+    if save: 
+        if interval==0: print("WARNING: Interval must not be zero.")
+        anim.save(name,writer='ffmpeg')
     return anim
     #plt.show(ani)
 
