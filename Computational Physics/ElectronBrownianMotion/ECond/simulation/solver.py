@@ -13,7 +13,7 @@ def BF(X,Y,t):
     return X*0 #In order: [Bz]
 
 class ECond:
-    def __init__(self,h=0.05,N=100,Np=1,EField=EF,BField=BF,gamma=0.1,R=0.3,verbose=False):
+    def __init__(self,h=0.05,N=100,Np=1,EField=EF,BField=BF,gamma=0.1,R=0.3,Q=-1,verbose=False):
         """
             @params
                 EField: func. It is a function of X,Y,t and it returns a list of the form [Ex, Ey]
@@ -33,6 +33,7 @@ class ECond:
         self.BField = BField
         self.gamma = gamma
         self.R = R
+        self.Q = Q
 
     def get_self(self):
         return self
@@ -72,7 +73,6 @@ class ECond:
         LY[0] = CI[1]
         LVx[0] = CI[2]
         LVy[0] = CI[3]
-        self.Q = -1
         
         for i in range(self.N):
             self.i = i
