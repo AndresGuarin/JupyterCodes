@@ -20,7 +20,8 @@ def plot_boxes(box1,box2):
 
 def animate_path(self,s,kind=0,save=False,name=None,verbose=True,
                  plot_params=['-r','or',0.2,5.0,0.5],length=8,interval=100,dj=1,
-                 j0=1,L=None,comet=False,ltraj=100,box1=None,box2=None,b_param=1):
+                 j0=1,L=None,comet=False,ltraj=100,box1=None,box2=None,b_param=1,
+                 adjust_axix=False):
     """
     Animates the positions of the particles of the system.
 
@@ -60,6 +61,8 @@ def animate_path(self,s,kind=0,save=False,name=None,verbose=True,
                 plotted in the animation.
         b_param: float
                 Parameter of the x- and y-cut of the line of code that computes the "current density" J 
+        adjust_axis: bool
+                If true, it will adjust the axis so that they become even
     """
     
     # Time list
@@ -95,6 +98,8 @@ def animate_path(self,s,kind=0,save=False,name=None,verbose=True,
         if L!= None: plt.xlim(-L,L); plt.ylim(-L,L)
         if box1 != None: plot_boxes(box1,box2)
         if verbose: plt.legend(loc='upper right')
+        if adjust_axix: xm = np.max(box1)*1.3; plt.xlim(-xm,xm); plt.ylim(-xm,xm)
+             
         J = -np.sum(s[3][j,:][(LY[j,:]>=-b)*(LY[j,:]<=b)*(LY[j,:]<0)]) + np.sum(s[2][j,:][LY[j,:]<b])+ np.sum(s[3][j,:][(LY[j,:]>=-b)*(LY[j,:]<=b)*(LX[j,:]>0)]) - np.sum(s[2][j,:][LY[j,:]>-b])
         ax.quiver(0, 0, J, 0, scale_units='xy',angles='xy',scale=4,color='orange',width=0.01)
     # Create figure and axis

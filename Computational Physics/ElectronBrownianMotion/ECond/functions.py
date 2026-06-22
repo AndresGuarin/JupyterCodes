@@ -34,12 +34,6 @@ def get_uniques(X,Y):
     W=np.unique(Z)
     return np.real(W), np.imag(W)
 
-slope=3; width=4
-a=np.arctanh(-0.9)/slope + 5*width
-b=np.arctanh(0.9)/slope + 3*width
-box1=[-a,a,-a,a]
-box2=[-b,b,-b,b]
-
 def get_positions_square_wire(box1,box2,Np=50,mx=50,my=5,seed=None):
     a,b,c,d = box1
     l,m,n,p = box2
@@ -71,7 +65,7 @@ def get_positions_square_wire(box1,box2,Np=50,mx=50,my=5,seed=None):
     Y0f = np.concatenate([Y1,X2-delta1,Y3+delta3,X4+delta5])
     return X0f, Y0f
 
-def get_positions_rounded_wire(slope, width, m=20,Np=80,verbose=False,seed=None,n=6):
+def get_positions_rounded_wire(slope, width, m=20,Np=80,seed=None,n=6):
     if seed!=None: np.random.seed(seed)
     x0 = np.arctanh(-0.9)/slope + 5*width
     tt = np.linspace(-x0,x0,m)
@@ -85,14 +79,52 @@ def get_positions_rounded_wire(slope, width, m=20,Np=80,verbose=False,seed=None,
     X2, Y2 = X1[ix], Y1[ix]
 
     X2f, Y2f = get_uniques(X2,Y2)
-
-    if verbose:
-        plt.figure(figsize=(7,7))
-        #plt.plot(X1,Y1,'-b')
-        plt.plot(X1,Y1,'ob')
-        plt.plot(X2f,Y2f,'or')
-        plt.show()
     return X2f, Y2f
+
+def get_positions_rectcircle_wire(slope1, slope2, width,c1=3, c2=5,f1=4,f2=2, m=20,Np=80,
+                                  seed=None,n=6,z1=0.9,z2=0.9):
+    """
+    @params
+        slope1: float
+                Slope of the exterior border of the wire
+        slope2: float
+                Slope of the interior border of the wire
+        width: float
+                Width of the wire
+        c1: float
+                Factor of amplification of the exterior border length (in x-axis)
+        c2: float
+                Factor of amplification of the interior border length (in x-axis)
+        f1: float
+                Coefficient that controls the size of the unstranched exterior border 
+        f2: float
+                Coefficient that controls the size of the unstranched interior border
+        m: int
+            Number of subdivisions of the grid that is put over the wire
+        Np: int
+            Numer of particles
+        seed: int
+            Seed of the random values
+        n: int
+            Degree of the squircle
+    """
+    if seed!=None: np.random.seed(seed)
+    if slope2<slope1: print('WARNING: slope2 is less than slope1')
+    x0 = (np.arctanh(-z1)/slope1 + f1*width)*c1
+    tt = np.linspace(-x0,x0,m)    
+    X0, Y0 = np.meshgrid(tt,tt)
+    Rho1 = (np.abs(X0/c1)**n+np.abs(Y0)**n)**(1/n)
+    Rho2 = (np.abs(X0/c2)**n+np.abs(Y0)**n)**(1/n)
+    ii = Rho1<=np.arctanh(-z1)/slope1 + f1*width
+    jj = Rho2>=np.arctanh(z2)/slope2 + f2*width
+    X1, Y1 = X0[ii*jj], Y0[ii*jj]
+
+    ix = np.random.randint(low=0,high=len(X1),size=Np)
+    X2, Y2 = X1[ix], Y1[ix]
+
+    X2f, Y2f = get_uniques(X2,Y2)
+    return X2f, Y2f
+
 
 def get_time():
     date = [datetime.today().hour, datetime.today().minute, datetime.today().second]
